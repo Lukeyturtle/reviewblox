@@ -9,7 +9,7 @@ OWNER_USERNAME = "Lturtless"  # set to YOUR Roblox username (must match OWNER_US
 [[d1_databases]]
 binding = "DB"
 database_name = "reviewblox"
-database_id = "REPLACE_WITH_YOUR_DATABASE_ID"
+database_id = "0d58c2b4-d3ba-48fe-9335-cc8987925e5e"
 
 # ADMIN_KEY is set as a secret, not here:
 #   npx wrangler secret put ADMIN_KEY
