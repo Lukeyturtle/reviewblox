@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReviewBlox — Roblox Game Reviews</title>
+<style>
+  :root{
+    --bg:#0e1016; --card:#181b23; --card2:#20242f; --line:#2b313d;
+    --text:#eef0f6; --muted:#98a1b2; --accent:#ff4655; --accent2:#00c2ff; --gold:#ffc53d;
+    --chip:#272c38; --green:#1ed47f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.5}
+  a{color:inherit}
+  .topbar{position:sticky;top:0;z-index:10;background:rgba(14,16,22,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);padding:12px 20px;display:flex;align-items:center;gap:16px}
+  .logo{font-weight:900;font-size:1.35rem;letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
+  .logo b{color:var(--accent)}
+  .logo .box{background:var(--accent);color:#fff;border-radius:7px;padding:2px 7px;font-size:1rem}
+  .nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+  .nav button{padding:8px 14px;border:0;border-radius:8px;background:transparent;color:var(--muted);
+    font-weight:600;cursor:pointer;font-size:.9rem}
+  .nav button.active{background:var(--card2);color:var(--text)}
+  .nav button.active[data-tab="recs"]{color:var(--accent2)}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+  .hero{text-align:center;padding:14px 0 6px}
+  .hero h1{margin:0;font-size:1.6rem}
+  .hero p{margin:6px 0 0;color:var(--muted)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+  h2{margin:0 0 12px;font-size:1.15rem}
+  h2 .pill{font-size:.72rem;background:var(--chip);color:var(--muted);padding:2px 9px;border-radius:999px;margin-left:8px;font-weight:600}
+  label{display:block;font-size:.8rem;color:var(--muted);margin:12px 0 4px}
+  input,select,textarea{width:100%;padding:11px;border-radius:9px;border:1px solid var(--line);
+    background:var(--card2);color:var(--text);font-size:.95rem;font-family:inherit}
+  textarea{min-height:90px;resize:vertical}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .row > div{flex:1;min-width:150px}
+  button.btn{margin-top:14px;padding:11px 18px;border:0;border-radius:9px;background:var(--accent);
+    color:#fff;font-weight:700;cursor:pointer;font-size:.95rem}
+  button.btn.alt{background:var(--card2);border:1px solid var(--line);color:var(--text)}
+  .muted{color:var(--muted);font-size:.88rem}
+  .note{background:var(--card2);border-left:3px solid var(--accent2);padding:10px 12px;
+    border-radius:8px;font-size:.84rem;color:var(--muted);margin-top:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip{background:var(--chip);padding:5px 11px;border-radius:999px;font-size:.8rem;cursor:pointer;border:1px solid transparent}
+  .chip.on{border-color:var(--accent2);color:var(--accent2)}
+  .chip.sm{cursor:default;font-size:.72rem;padding:3px 9px}
+  /* star input */
+  .stars{display:inline-flex;gap:4px;font-size:1.7rem;cursor:pointer;margin-top:6px}
+  .stars span{color:#3a4150;transition:color .1s}
+  .stars span.on{color:var(--gold)}
+  .starsm{color:var(--gold);font-size:.95rem;letter-spacing:1px}
+  .starsm .off{color:#3a4150}
+  /* review feed */
+  .review{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+  .review .head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .review .gname{font-size:1.1rem;font-weight:800;margin:0}
+  .review .by{font-size:.76rem;color:var(--muted);margin-top:2px}
+  .review .body{margin:10px 0 8px;white-space:pre-wrap}
+  .review .genres{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .review .actions{display:flex;gap:14px;margin-top:10px;font-size:.82rem;color:var(--muted)}
+  .review .actions button{background:none;border:0;color:var(--muted);cursor:pointer;font-size:.82rem;padding:0;display:flex;gap:5px;align-items:center}
+  .review .actions button.liked{color:var(--accent)}
+  .x{background:transparent;border:0;color:var(--accent);cursor:pointer;font-size:1rem}
+  .rec{display:flex;gap:12px;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:12px}
+  .rec .score{min-width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,var(--accent2),#0077ff);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;color:#fff;line-height:1}
+  .rec .score b{font-size:1.15rem}.rec .score i{font-size:.56rem;font-style:normal;opacity:.85;margin-top:2px}
+  .rec h3{margin:0 0 3px;font-size:1.05rem}
+  .rec h3 a{text-decoration:none}.rec h3 a:hover{color:var(--accent2)}
+  .rec .genres{font-size:.78rem;color:var(--muted);margin-top:3px}
+  .rec .why{font-size:.82rem;color:var(--green);margin-top:5px}
+  .empty{text-align:center;color:var(--muted);padding:30px}
+  .bar{height:7px;background:var(--card2);border-radius:4px;overflow:hidden;margin-top:4px}
+  .bar > i{display:block;height:100%;background:var(--accent2)}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .toolbar input{flex:2;min-width:160px}.toolbar select{flex:1;min-width:120px}
+  .stat{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px}
+  .stat div b{font-size:1.4rem}.stat div span{display:block;font-size:.74rem;color:var(--muted)}
+  .hidden{display:none}
+  footer{text-align:center;padding:24px;color:var(--muted);font-size:.78rem}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><span class="box">R</span><span>Review<b>Blox</b></span></div>
+  <nav class="nav">
+    <button data-tab="browse" class="active">Reviews</button>
+    <button data-tab="write">Write a Review</button>
+    <button data-tab="recs">Recommended</button>
+    <button data-tab="account">Account</button>
+  </nav>
+</div>
+
+<div class="wrap">
+
+  <!-- BROWSE -->
+  <section id="tab-browse">
+    <div class="hero">
+      <h1>Roblox game reviews, by you.</h1>
+      <p>Rate the games you play, write honest reviews, and get recommendations.</p>
+    </div>
+    <div class="card">
+      <div class="stat" id="stats"></div>
+    </div>
+    <div class="toolbar">
+      <input id="search" placeholder="Search reviews by game or text…">
+      <select id="sort">
+        <option value="new">Newest</option>
+        <option value="top">Highest rated</option>
+        <option value="low">Lowest rated</option>
+        <option value="liked">Most liked</option>
+      </select>
+    </div>
+    <div id="feed"></div>
+  </section>
+
+  <!-- WRITE -->
+  <section id="tab-write" class="hidden">
+    <div class="card">
+      <h2 id="writeTitle">Write a review</h2>
+      <div class="row">
+        <div>
+          <label>Game name</label>
+          <input id="wName" placeholder="e.g. Blox Fruits">
+        </div>
+        <div>
+          <label>Your name (optional)</label>
+          <input id="wAuthor" placeholder="Anonymous">
+        </div>
+      </div>
+      <label>Your rating</label>
+      <div class="stars" id="starInput">
+        <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+      </div>
+      <label>Genres / vibe</label>
+      <div class="chips" id="genrePicker"></div>
+      <label>Your review</label>
+      <textarea id="wBody" placeholder="What did you like or dislike? Who is it for?"></textarea>
+      <button class="btn" id="saveReview">Publish review</button>
+      <button class="btn alt" id="cancelEdit" style="display:none">Cancel edit</button>
+    </div>
+  </section>
+
+  <!-- RECOMMENDED -->
+  <section id="tab-recs" class="hidden">
+    <div class="hero">
+      <h1>Recommended for you</h1>
+      <p>Based on the games you've reviewed highly and your Roblox favorites.</p>
+    </div>
+    <div class="card">
+      <h2>Your taste profile</h2>
+      <p class="muted" id="tasteSummary">Review a few games to unlock recommendations.</p>
+      <div id="tasteBars"></div>
+    </div>
+    <div id="recList"></div>
+  </section>
+
+  <!-- ACCOUNT -->
+  <section id="tab-account" class="hidden">
+    <div class="card">
+      <h2>Link your Roblox account</h2>
+      <label>Roblox username</label>
+      <input id="rbxUser" placeholder="e.g. builderman">
+      <button class="btn" id="linkBtn">Import my favorite games</button>
+      <div class="note">
+        <strong>How this works:</strong> Roblox has no public API for "games you've played", and a static
+        site can't read your private activity. This imports the games you've publicly <strong>favorited</strong>
+        and folds them into your <em>Recommended</em> page. If Roblox blocks the request from the browser
+        (CORS), you'll get a notice — your reviews still power recommendations on their own.
+      </div>
+      <div id="linkStatus" class="muted" style="margin-top:12px"></div>
+      <div id="favList" style="margin-top:12px"></div>
+    </div>
+    <div class="card">
+      <h2>Your data</h2>
+      <p class="muted">Everything is stored locally in this browser. Export a backup or clear it.</p>
+      <button class="btn alt" id="exportBtn">Export reviews (JSON)</button>
+      <button class="btn alt" id="clearBtn">Clear all data</button>
+    </div>
+  </section>
+
+</div>
+
+<footer>ReviewBlox · reviews are stored locally in your browser · not affiliated with Roblox Corporation</footer>
+
+<script>
+const GENRES = ["Simulator","Roleplay","Obby","Tycoon","PvP/Fighting","Horror","Adventure",
+  "Building","Racing","Survival","Tower Defense","Social/Hangout","Anime","Pet/Collecting","Shooter","Puzzle"];
+
+const CATALOG = [
+  {n:"Adopt Me!",g:["Roleplay","Pet/Collecting","Social/Hangout"]},
+  {n:"Brookhaven RP",g:["Roleplay","Social/Hangout","Building"]},
+  {n:"Blox Fruits",g:["Adventure","PvP/Fighting","Anime"]},
+  {n:"Pet Simulator 99",g:["Simulator","Pet/Collecting"]},
+  {n:"Tower of Hell",g:["Obby","PvP/Fighting"]},
+  {n:"Doors",g:["Horror","Adventure","Puzzle"]},
+  {n:"Grow a Garden",g:["Simulator","Building","Social/Hangout"]},
+  {n:"Murder Mystery 2",g:["PvP/Fighting","Social/Hangout","Survival"]},
+  {n:"Arsenal",g:["Shooter","PvP/Fighting"]},
+  {n:"Phantom Forces",g:["Shooter","PvP/Fighting"]},
+  {n:"Bee Swarm Simulator",g:["Simulator","Adventure","Pet/Collecting"]},
+  {n:"Theme Park Tycoon 2",g:["Tycoon","Building"]},
+  {n:"Retail Tycoon 2",g:["Tycoon","Building"]},
+  {n:"Jailbreak",g:["Roleplay","Racing","PvP/Fighting","Adventure"]},
+  {n:"Natural Disaster Survival",g:["Survival","Social/Hangout"]},
+  {n:"Tower Defense Simulator",g:["Tower Defense","PvP/Fighting"]},
+  {n:"All Star Tower Defense",g:["Tower Defense","Anime"]},
+  {n:"Welcome to Bloxburg",g:["Roleplay","Building","Social/Hangout"]},
+  {n:"Piggy",g:["Horror","Survival","Puzzle"]},
+  {n:"The Mimic",g:["Horror","Adventure"]},
+  {n:"Speed Run 4",g:["Obby","Racing"]},
+  {n:"Vehicle Legends",g:["Racing","Roleplay"]},
+  {n:"Anime Fighting Simulator",g:["Simulator","Anime","PvP/Fighting"]},
+  {n:"Build A Boat For Treasure",g:["Building","Adventure","Puzzle"]},
+  {n:"Lumber Tycoon 2",g:["Tycoon","Building","Survival"]},
+  {n:"Shindo Life",g:["Anime","Adventure","PvP/Fighting"]},
+  {n:"Royale High",g:["Roleplay","Social/Hangout","Adventure"]},
+  {n:"Flee the Facility",g:["Horror","Survival","PvP/Fighting"]},
+  {n:"Super Golf",g:["Puzzle","Social/Hangout"]},
+  {n:"Islands",g:["Simulator","Building","Survival"]},
+  {n:"Pls Donate",g:["Social/Hangout","Roleplay"]},
+  {n:"Rivals",g:["Shooter","PvP/Fighting"]},
+  {n:"Dress to Impress",g:["Social/Hangout","Roleplay","Puzzle"]},
+  {n:"99 Nights in the Forest",g:["Survival","Horror","Adventure"]},
+  {n:"Steal a Brainrot",g:["Simulator","Pet/Collecting","Social/Hangout"]},
+  {n:"Fisch",g:["Simulator","Adventure","Social/Hangout"]},
+  {n:"Rainbow Friends (RP)",g:["Horror","Roleplay","Survival"]}
+];
+
+const LS_KEY="reviewblox_v1";
+let state={ reviews:[], favorites:[], starSel:0, editId:null, genreSel:[] };
+
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify({reviews:state.reviews,favorites:state.favorites})); }catch(e){} }
+function load(){ try{ const d=JSON.parse(localStorage.getItem(LS_KEY)); if(d){ state.reviews=d.reviews||[]; state.favorites=d.favorites||[]; } }catch(e){} }
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+function starStr(r){ let s=""; for(let i=1;i<=5;i++) s+= i<=r?'<span>★</span>':'<span class="off">★</span>'; return '<span class="starsm">'+s+'</span>'; }
+
+// ---- Nav ----
+document.querySelectorAll(".nav button").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    ["browse","write","recs","account"].forEach(t=>document.getElementById("tab-"+t).classList.add("hidden"));
+    document.getElementById("tab-"+b.dataset.tab).classList.remove("hidden");
+    if(b.dataset.tab==="recs") renderRecs();
+    if(b.dataset.tab==="browse") renderFeed();
+    window.scrollTo(0,0);
+  };
+});
+function goTab(name){ document.querySelector('.nav button[data-tab="'+name+'"]').click(); }
+
+// ---- Genre picker ----
+const picker=document.getElementById("genrePicker");
+GENRES.forEach(g=>{
+  const c=document.createElement("div"); c.className="chip"; c.textContent=g;
+  c.onclick=()=>{ c.classList.toggle("on"); state.genreSel=[...picker.querySelectorAll(".chip.on")].map(x=>x.textContent); };
+  picker.appendChild(c);
+});
+
+// ---- Star input ----
+const starInput=document.getElementById("starInput");
+function paintStars(n){ starInput.querySelectorAll("span").forEach(s=>s.classList.toggle("on", +s.dataset.v<=n)); }
+starInput.querySelectorAll("span").forEach(s=>{
+  s.onmouseenter=()=>paintStars(+s.dataset.v);
+  s.onclick=()=>{ state.starSel=+s.dataset.v; paintStars(state.starSel); };
+});
+starInput.onmouseleave=()=>paintStars(state.starSel);
+
+// ---- Save review ----
+document.getElementById("saveReview").onclick=()=>{
+  const name=document.getElementById("wName").value.trim();
+  const body=document.getElementById("wBody").value.trim();
+  const author=document.getElementById("wAuthor").value.trim()||"Anonymous";
+  if(!name){ alert("Enter a game name."); return; }
+  if(!state.starSel){ alert("Pick a star rating."); return; }
+  const genres=[...picker.querySelectorAll(".chip.on")].map(x=>x.textContent);
+  if(state.editId){
+    const r=state.reviews.find(x=>x.id===state.editId);
+    if(r){ Object.assign(r,{game:name,author,rating:state.starSel,genres,body,edited:Date.now()}); }
+  } else {
+    state.reviews.push({id:uid(),game:name,author,rating:state.starSel,genres,body,likes:0,liked:false,date:Date.now()});
+  }
+  save(); resetWriteForm(); goTab("browse");
+};
+document.getElementById("cancelEdit").onclick=()=>{ resetWriteForm(); goTab("browse"); };
+
+function resetWriteForm(){
+  state.editId=null; state.starSel=0; state.genreSel=[];
+  document.getElementById("wName").value=""; document.getElementById("wBody").value=""; document.getElementById("wAuthor").value="";
+  picker.querySelectorAll(".chip.on").forEach(c=>c.classList.remove("on"));
+  paintStars(0);
+  document.getElementById("writeTitle").textContent="Write a review";
+  document.getElementById("saveReview").textContent="Publish review";
+  document.getElementById("cancelEdit").style.display="none";
+}
+function editReview(id){
+  const r=state.reviews.find(x=>x.id===id); if(!r) return;
+  state.editId=id; state.starSel=r.rating; state.genreSel=r.genres||[];
+  document.getElementById("wName").value=r.game;
+  document.getElementById("wAuthor").value=r.author==="Anonymous"?"":r.author;
+  document.getElementById("wBody").value=r.body||"";
+  paintStars(r.rating);
+  picker.querySelectorAll(".chip").forEach(c=>c.classList.toggle("on",(r.genres||[]).includes(c.textContent)));
+  document.getElementById("writeTitle").textContent="Edit review";
+  document.getElementById("saveReview").textContent="Save changes";
+  document.getElementById("cancelEdit").style.display="inline-block";
+  goTab("write");
+}
+
+// ---- Feed ----
+document.getElementById("search").oninput=renderFeed;
+document.getElementById("sort").onchange=renderFeed;
+
+function renderStats(){
+  const el=document.getElementById("stats");
+  const n=state.reviews.length;
+  const avg=n? (state.reviews.reduce((a,r)=>a+r.rating,0)/n):0;
+  const games=new Set(state.reviews.map(r=>r.game.toLowerCase())).size;
+  el.innerHTML=`<div><b>${n}</b><span>reviews</span></div>
+    <div><b>${games}</b><span>games</span></div>
+    <div><b>${avg?avg.toFixed(1):"—"}</b><span>avg rating</span></div>`;
+}
+
+function renderFeed(){
+  renderStats();
+  const feed=document.getElementById("feed");
+  const q=document.getElementById("search").value.toLowerCase().trim();
+  const sort=document.getElementById("sort").value;
+  let list=[...state.reviews];
+  if(q) list=list.filter(r=>r.game.toLowerCase().includes(q)||(r.body||"").toLowerCase().includes(q));
+  list.sort((a,b)=>({
+    new:b.date-a.date, top:b.rating-a.rating||b.date-a.date,
+    low:a.rating-b.rating||b.date-a.date, liked:(b.likes||0)-(a.likes||0)
+  })[sort]);
+  if(!state.reviews.length){
+    feed.innerHTML='<div class="empty">No reviews yet.<br><br><button class="btn" onclick="goTab(\'write\')">Write the first review</button></div>';
+    return;
+  }
+  if(!list.length){ feed.innerHTML='<div class="empty">No reviews match your search.</div>'; return; }
+  feed.innerHTML="";
+  list.forEach(r=>{
+    const el=document.createElement("div"); el.className="review";
+    const when=new Date(r.date).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
+    const url="https://www.roblox.com/games/?keyword="+encodeURIComponent(r.game);
+    el.innerHTML=`
+      <div class="head">
+        <div>
+          <h3 class="gname"><a href="${url}" target="_blank" rel="noopener" style="text-decoration:none">${esc(r.game)}</a></h3>
+          <div class="by">${starStr(r.rating)} · by ${esc(r.author)} · ${when}${r.edited?" (edited)":""}</div>
+        </div>
+      </div>
+      ${r.body?`<div class="body">${esc(r.body)}</div>`:""}
+      <div class="genres">${(r.genres||[]).map(g=>'<span class="chip sm">'+esc(g)+'</span>').join("")}</div>
+      <div class="actions">
+        <button class="likeBtn ${r.liked?'liked':''}">${r.liked?'❤️':'🤍'} <span>${r.likes||0}</span></button>
+        <button class="editBtn">✏️ Edit</button>
+        <button class="delBtn">🗑 Delete</button>
+      </div>`;
+    el.querySelector(".likeBtn").onclick=()=>{ r.liked=!r.liked; r.likes=(r.likes||0)+(r.liked?1:-1); if(r.likes<0)r.likes=0; save(); renderFeed(); };
+    el.querySelector(".editBtn").onclick=()=>editReview(r.id);
+    el.querySelector(".delBtn").onclick=()=>{ if(confirm("Delete this review?")){ state.reviews=state.reviews.filter(x=>x.id!==r.id); save(); renderFeed(); } };
+    feed.appendChild(el);
+  });
+}
+
+// ---- Recommendations ----
+function buildTaste(){
+  const w={};
+  state.reviews.forEach(r=>{
+    const weight=(r.rating-2.5); // 4&5 positive, 1&2 negative
+    (r.genres||[]).forEach(g=>{ w[g]=(w[g]||0)+weight; });
+  });
+  // light boost from imported favorites (genre-matched via catalog)
+  state.favorites.forEach(f=>{
+    const cat=CATALOG.find(c=>c.n.toLowerCase()===f.toLowerCase());
+    if(cat) cat.g.forEach(g=>{ w[g]=(w[g]||0)+0.75; });
+  });
+  return w;
+}
+
+function renderRecs(){
+  const taste=buildTaste();
+  const pos=Object.entries(taste).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
+  const summary=document.getElementById("tasteSummary");
+  const bars=document.getElementById("tasteBars");
+  const recList=document.getElementById("recList");
+
+  if(!pos.length){
+    summary.textContent="Review a few games (3–4 stars and up, with genres) to unlock recommendations.";
+    bars.innerHTML=""; recList.innerHTML='<div class="empty">Nothing to recommend yet.</div>'; return;
+  }
+  summary.textContent="You lean toward: "+pos.slice(0,3).map(x=>x[0]).join(", ");
+  bars.innerHTML="";
+  pos.slice(0,5).forEach(([g,v])=>{
+    const pct=Math.round(v/pos[0][1]*100);
+    bars.innerHTML+=`<div style="margin-top:9px"><div class="muted" style="font-size:.78rem">${esc(g)}</div><div class="bar"><i style="width:${pct}%"></i></div></div>`;
+  });
+
+  const reviewed=new Set(state.reviews.map(r=>r.game.toLowerCase()));
+  const scored=CATALOG.filter(c=>!reviewed.has(c.n.toLowerCase())).map(c=>{
+    let s=0, matched=[];
+    c.g.forEach(g=>{ if(taste[g]>0){ s+=taste[g]; matched.push(g); } });
+    if(state.favorites.some(f=>f.toLowerCase()===c.n.toLowerCase())) s+=1.5;
+    return {...c,score:s,matched};
+  }).filter(c=>c.score>0).sort((a,b)=>b.score-a.score).slice(0,12);
+
+  if(!scored.length){ recList.innerHTML='<div class="empty">No matches yet — review more games with genres.</div>'; return; }
+  const max=scored[0].score;
+  recList.innerHTML="";
+  scored.forEach(c=>{
+    const pct=Math.round(c.score/max*100);
+    const url="https://www.roblox.com/games/?keyword="+encodeURIComponent(c.n);
+    const el=document.createElement("div"); el.className="rec";
+    el.innerHTML=`<div class="score"><b>${pct}</b><i>MATCH</i></div>
+      <div>
+        <h3><a href="${url}" target="_blank" rel="noopener">${esc(c.n)} ↗</a></h3>
+        <div class="genres">${c.g.map(esc).join(" · ")}</div>
+        <div class="why">Because you like ${c.matched.map(esc).join(", ")}</div>
+      </div>`;
+    recList.appendChild(el);
+  });
+}
+
+// ---- Account / link ----
+document.getElementById("linkBtn").onclick=async()=>{
+  const user=document.getElementById("rbxUser").value.trim();
+  const status=document.getElementById("linkStatus");
+  const favEl=document.getElementById("favList");
+  if(!user){ status.textContent="Enter a username first."; return; }
+  status.textContent="Looking up "+user+"…"; favEl.innerHTML="";
+  try{
+    const r=await fetch("https://users.roblox.com/v1/usernames/users",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({usernames:[user],excludeBannedUsers:true})});
+    const d=await r.json();
+    if(!d.data||!d.data.length){ status.textContent="No Roblox user found with that name."; return; }
+    const id=d.data[0].id;
+    status.textContent="Found user. Fetching favorited games…";
+    const fr=await fetch(`https://games.roblox.com/v2/users/${id}/favorite/games?limit=25&sortOrder=Desc`);
+    const fd=await fr.json();
+    const titles=(fd.data||[]).map(x=>x.name).filter(Boolean);
+    if(!titles.length){ status.textContent="Linked, but no public favorited games were found."; return; }
+    state.favorites=titles; save();
+    status.innerHTML=`✅ Imported ${titles.length} favorite game(s) from <strong>${esc(user)}</strong>. They now influence your Recommended page.`;
+    favEl.innerHTML='<div class="chips">'+titles.map(t=>'<span class="chip sm">'+esc(t)+'</span>').join("")+'</div>';
+  }catch(e){
+    status.innerHTML="⚠️ Roblox blocked the request from the browser (a CORS restriction — expected on a static site). "+
+      "Your reviews still power recommendations. To make linking reliable, host it with a small proxy.";
+  }
+};
+
+// ---- Data tools ----
+document.getElementById("exportBtn").onclick=()=>{
+  const blob=new Blob([JSON.stringify({reviews:state.reviews,favorites:state.favorites},null,2)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="reviewblox-backup.json"; a.click();
+};
+document.getElementById("clearBtn").onclick=()=>{
+  if(confirm("Delete ALL reviews and imported favorites? This cannot be undone.")){
+    state.reviews=[]; state.favorites=[]; save(); renderFeed();
+    document.getElementById("linkStatus").textContent=""; document.getElementById("favList").innerHTML="";
+  }
+};
+
+load(); renderFeed();
+</script>
+</body>
+</html>
