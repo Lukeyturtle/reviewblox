@@ -19,14 +19,33 @@ reviews with official Roblox genre tags, see charts, get recommendations, and de
 The site works immediately in local mode. To make it a real multi-user site, deploy the backend.
 
 ## Features
-- **Home** — trending, top-rated, latest reviews, quick stats.
-- **Browse / search** — ~110-game catalog, filter by any official Roblox tag, sort, and
-  **review any game by name** even if it's not in the catalog.
+- **Home** — trending, top-rated, most-played-right-now, latest reviews, quick stats.
+- **Browse / search** — **7,600+ Roblox games** (from `games.json`, a snapshot of
+  [Rolimons](https://www.rolimons.com)' public game list) with thumbnails, live player
+  counts, and direct Roblox links. Filter by any official Roblox tag, sort, and
+  **review any game by name** even if it's not listed.
 - **Game pages** — aggregate rating, star distribution, and all reviews for that game.
 - **Write reviews** — 5-star rating, official Roblox genre/subgenre tags, free text.
-- **Charts** — rating distribution, reviews by tag, top-rated games, critics vs community.
-- **Professional Critics** — verified badge + extra weight in recommendations.
+- **Charts** — most played, rating distribution, reviews by tag, top-rated games, critics vs community.
+- **Trust-based accounts** — sign in with just your Roblox username. Most people type
+  `none` as the password (honor system). Pro Critics and the owner have a real password.
+- **Owner panel** — the owner (set via `OWNER_USERNAME`) can promote reviewers to
+  **Professional Critic** by setting their username + a password to share with them.
 - **Recommendations** — from your highly-rated reviews and imported Roblox favorites.
+
+## Config (two places must match)
+In **`index.html`**:
+```js
+const API_BASE = "";                 // "" = local mode; set to your Worker URL for shared mode
+const OWNER_USERNAME = "Lukeyturtle"; // <-- set to YOUR Roblox username
+```
+In **`worker/wrangler.toml`** set the same `OWNER_USERNAME` under `[vars]`.
+
+## Refreshing the game list
+```bash
+python3 tools/fetch_games.py   # re-snapshots games.json from Rolimons (sorted by live players)
+```
+Then commit the updated `games.json`.
 
 ## Deploy the backend (shared mode)
 
@@ -43,12 +62,16 @@ wrangler d1 create reviewblox
 # 2. Create the tables
 wrangler d1 execute reviewblox --remote --file=./schema.sql
 
-# 3. Set an admin key (used to promote/remove Professional Critics)
+# 3. Set an admin key (master key to bootstrap/override critic promotions)
 wrangler secret put ADMIN_KEY
 
 # 4. Deploy
 wrangler deploy
 ```
+
+After deploy: **sign in once as the owner** (the `OWNER_USERNAME`) with a password to
+claim your account. From then on, your Account page shows the Owner panel, and promoting
+a critic is authorized by your owner login. The `ADMIN_KEY` is only a fallback/override.
 
 `wrangler deploy` prints your Worker URL, e.g. `https://reviewblox-api.<you>.workers.dev`.
 

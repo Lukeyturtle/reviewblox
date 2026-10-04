@@ -13,6 +13,9 @@ CREATE TABLE IF NOT EXISTS reviews (
 CREATE INDEX IF NOT EXISTS idx_reviews_game ON reviews(game);
 CREATE INDEX IF NOT EXISTS idx_reviews_date ON reviews(date);
 
-CREATE TABLE IF NOT EXISTS critics (
-  name TEXT PRIMARY KEY COLLATE NOCASE
+-- Trust-based accounts. password = SHA-256 hex, or NULL for passwordless.
+CREATE TABLE IF NOT EXISTS accounts (
+  username TEXT PRIMARY KEY COLLATE NOCASE,
+  password TEXT,
+  critic   INTEGER NOT NULL DEFAULT 0
 );

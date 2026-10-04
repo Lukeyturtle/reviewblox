@@ -2,6 +2,9 @@ name = "reviewblox-api"
 main = "src/index.js"
 compatibility_date = "2024-11-01"
 
+[vars]
+OWNER_USERNAME = "Lukeyturtle"  # set to YOUR Roblox username (must match OWNER_USERNAME in index.html)
+
 # D1 database binding — fill in database_id after you create it (see README)
 [[d1_databases]]
 binding = "DB"

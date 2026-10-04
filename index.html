@@ -14,23 +14,23 @@
   body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
   a{color:inherit;text-decoration:none}
   .topbar{position:sticky;top:0;z-index:20;background:rgba(14,16,22,.94);backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .logo{font-weight:900;font-size:1.3rem;display:flex;align-items:center;gap:8px;cursor:pointer}
   .logo b{color:var(--accent)} .logo .box{background:var(--accent);color:#fff;border-radius:7px;padding:2px 7px}
-  .topsearch{flex:1;min-width:150px;max-width:420px;position:relative}
+  .topsearch{flex:1;min-width:140px;max-width:380px;position:relative}
   .topsearch input{width:100%;padding:9px 12px 9px 34px;border-radius:9px;border:1px solid var(--line);background:var(--card2);color:var(--text);font-size:.92rem}
   .topsearch::before{content:"🔍";position:absolute;left:11px;top:8px;font-size:.9rem;opacity:.7}
-  .nav{display:flex;gap:2px;flex-wrap:wrap}
-  .nav a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600;font-size:.9rem}
+  .nav{display:flex;gap:2px;flex-wrap:wrap;align-items:center}
+  .nav a{padding:8px 11px;border-radius:8px;color:var(--muted);font-weight:600;font-size:.9rem;cursor:pointer}
   .nav a.active{background:var(--card2);color:var(--text)}
-  .wrap{max-width:960px;margin:0 auto;padding:20px 16px 70px}
+  .acctchip{display:flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:.84rem;cursor:pointer}
+  .wrap{max-width:980px;margin:0 auto;padding:20px 16px 70px}
   .hero{text-align:center;padding:26px 10px 8px}
-  .hero h1{margin:0;font-size:2rem;letter-spacing:-.5px}
-  .hero p{margin:8px 0 0;color:var(--muted)}
+  .hero h1{margin:0;font-size:2rem;letter-spacing:-.5px}.hero p{margin:8px 0 0;color:var(--muted)}
   .section-h{display:flex;align-items:baseline;justify-content:space-between;margin:26px 0 8px}
-  .section-h h2{margin:0;font-size:1.2rem} .section-h a{font-size:.84rem;color:var(--accent2)}
+  .section-h h2{margin:0;font-size:1.2rem}.section-h a{font-size:.84rem;color:var(--accent2);cursor:pointer}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
-  h2{font-size:1.15rem} h3{font-size:1.05rem}
+  h2{font-size:1.15rem}h3{font-size:1.05rem}
   label{display:block;font-size:.8rem;color:var(--muted);margin:12px 0 4px}
   input,select,textarea{width:100%;padding:11px;border-radius:9px;border:1px solid var(--line);background:var(--card2);color:var(--text);font-size:.95rem;font-family:inherit}
   textarea{min-height:100px;resize:vertical}
@@ -41,12 +41,16 @@
   button.btn.sm{padding:7px 12px;font-size:.84rem;margin-top:0}
   .muted{color:var(--muted);font-size:.88rem}
   .note{background:var(--card2);border-left:3px solid var(--accent2);padding:10px 12px;border-radius:8px;font-size:.84rem;color:var(--muted);margin-top:12px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-  .gcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;transition:border-color .12s,transform .12s}
+  .note.warn{border-left-color:var(--gold)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+  .gcard{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .12s,transform .12s}
   .gcard:hover{border-color:var(--accent2);transform:translateY(-2px)}
-  .gcard .gtitle{font-weight:800;font-size:1rem}
-  .gcard .gtags{font-size:.72rem;color:var(--muted);margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .gcard .grate{margin-top:8px;font-size:.82rem;display:flex;align-items:center;gap:6px}
+  .gcard .thumb{width:100%;aspect-ratio:1/1;background:var(--card2);object-fit:cover;display:block}
+  .gcard .body{padding:11px 12px}
+  .gcard .gtitle{font-weight:800;font-size:.98rem;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .gcard .gtags{font-size:.7rem;color:var(--muted);margin-top:4px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+  .gcard .grate{margin-top:7px;font-size:.8rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .ccu{font-size:.7rem;color:var(--green)}
   .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
   .chip{background:var(--chip);padding:5px 10px;border-radius:999px;font-size:.78rem;cursor:pointer;border:1px solid transparent}
   .chip.on{border-color:var(--accent2);color:var(--accent2)}
@@ -67,21 +71,19 @@
   .rec .score b{font-size:1.15rem}.rec .score i{font-size:.55rem;font-style:normal;opacity:.85;margin-top:2px}
   .rec .why{font-size:.82rem;color:var(--green);margin-top:5px}
   .empty{text-align:center;color:var(--muted);padding:34px}
-  .bar{height:8px;background:var(--card2);border-radius:4px;overflow:hidden}
-  .bar>i{display:block;height:100%;background:var(--accent2)}
+  .bar{height:8px;background:var(--card2);border-radius:4px;overflow:hidden}.bar>i{display:block;height:100%;background:var(--accent2)}
   .chartrow{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:.84rem}
-  .chartrow .lab{width:130px;color:var(--muted);text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .chartrow .bar{flex:1}.chartrow .val{width:34px;text-align:right;color:var(--muted);font-size:.78rem}
+  .chartrow .lab{width:150px;color:var(--muted);text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .chartrow .bar{flex:1}.chartrow .val{width:50px;text-align:right;color:var(--muted);font-size:.78rem}
   .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
   .toolbar input{flex:2;min-width:160px}.toolbar select{flex:1;min-width:130px}
-  .stat{display:flex;gap:22px;flex-wrap:wrap}
-  .stat div b{font-size:1.5rem}.stat div span{display:block;font-size:.74rem;color:var(--muted)}
+  .stat{display:flex;gap:22px;flex-wrap:wrap}.stat div b{font-size:1.5rem}.stat div span{display:block;font-size:.74rem;color:var(--muted)}
   .back{display:inline-block;color:var(--accent2);font-size:.86rem;margin-bottom:10px;cursor:pointer}
-  .gamehead{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:flex-start}
+  .gamehead{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+  .gamehead img{width:120px;height:120px;border-radius:12px;object-fit:cover;background:var(--card2)}
   .big-rate{font-size:2.4rem;font-weight:900;line-height:1}
   footer{text-align:center;padding:24px;color:var(--muted);font-size:.78rem}
-  .apiflag{font-size:.72rem;padding:2px 8px;border-radius:999px;background:var(--card2);color:var(--muted)}
-  .apiflag.on{color:var(--green)}
+  .apiflag{font-size:.72rem;padding:2px 8px;border-radius:999px;background:var(--card2);color:var(--muted)}.apiflag.on{color:var(--green)}
 </style>
 </head>
 <body>
@@ -89,410 +91,276 @@
   <div class="logo" onclick="location.hash='#/'"><span class="box">R</span><span>Review<b>Blox</b></span></div>
   <div class="topsearch"><input id="topSearch" placeholder="Search Roblox games…" autocomplete="off"></div>
   <nav class="nav" id="nav">
-    <a href="#/" data-r="">Home</a>
-    <a href="#/browse" data-r="browse">Browse</a>
-    <a href="#/charts" data-r="charts">Charts</a>
-    <a href="#/critics" data-r="critics">Critics</a>
-    <a href="#/account" data-r="account">Account</a>
+    <a onclick="location.hash='#/'" data-r="">Home</a>
+    <a onclick="location.hash='#/browse'" data-r="browse">Browse</a>
+    <a onclick="location.hash='#/charts'" data-r="charts">Charts</a>
+    <a onclick="location.hash='#/critics'" data-r="critics">Critics</a>
+    <span id="acctSlot"></span>
   </nav>
 </div>
 
-<div class="wrap"><div id="view"></div></div>
+<div class="wrap"><div id="view"><div class="empty">Loading games…</div></div></div>
 <footer>ReviewBlox · a fan-made Roblox review site · not affiliated with Roblox Corporation · <span id="apiFlag" class="apiflag">local mode</span></footer>
-
 <datalist id="gameNames"></datalist>
 
 <script>
 /* =========================================================
-   CONFIG — set this to your deployed Cloudflare Worker URL
-   to turn on SHARED reviews + real critic roles.
-   Leave "" for local-only (per-browser) mode.
+   CONFIG
    ========================================================= */
-const API_BASE = ""; // e.g. "https://reviewblox-api.yourname.workers.dev"
+const API_BASE = "";                 // set to your Worker URL for shared mode, e.g. "https://reviewblox-api.you.workers.dev"
+const OWNER_USERNAME = "Lukeyturtle"; // <-- set this to YOUR Roblox username (the admin who can promote critics)
 
-/* ---------- Official Roblox genres & subgenres (tags) ---------- */
-const OFFICIAL_TAGS = [
-  "Action","Battlegrounds & Fighting","Open World Action","Music & Rhythm",
-  "Adventure","Exploration","Scavenger & Hunt","Story",
-  "Education","Entertainment",
-  "Obby & Platformer","Classic Obby","Tower Obby","Runner",
-  "Party & Casual","Childhood Game","Minigame","Quiz","Coloring & Drawing",
-  "Puzzle","Escape Room","Hidden Object","Match & Merge","Thinking Puzzle",
-  "RNG",
-  "Roleplay & Avatar Sim","Animal Sim","Dress Up","Life","Morph Roleplay","Pet Care",
-  "Shooter","Battle Royale","Deathmatch","PvE Shooter","Tactical Shooter",
-  "Shopping",
-  "Simulation","Tycoon","Incremental Simulator","Physics Sim","Sandbox","Tapping","Vehicle Sim","Idle",
-  "Social","Chat & Hangout","Content","Showcase","Visit",
-  "Sports & Racing","Racing","Sports",
-  "Strategy","Tower Defense","Board & Card",
-  "Survival","Horror","Open World Survival","1 vs All","Escape",
-  "Utility & Other"
-];
+/* ---------- Official Roblox genres & subgenres ---------- */
+const OFFICIAL_TAGS = ["Action","Battlegrounds & Fighting","Open World Action","Music & Rhythm","Adventure","Exploration","Scavenger & Hunt","Story","Education","Entertainment","Obby & Platformer","Classic Obby","Tower Obby","Runner","Party & Casual","Childhood Game","Minigame","Quiz","Coloring & Drawing","Puzzle","Escape Room","Hidden Object","Match & Merge","Thinking Puzzle","RNG","Roleplay & Avatar Sim","Animal Sim","Dress Up","Life","Morph Roleplay","Pet Care","Shooter","Battle Royale","Deathmatch","PvE Shooter","Tactical Shooter","Shopping","Simulation","Tycoon","Incremental Simulator","Physics Sim","Sandbox","Tapping","Vehicle Sim","Idle","Social","Chat & Hangout","Content","Showcase","Visit","Sports & Racing","Racing","Sports","Strategy","Tower Defense","Board & Card","Survival","Horror","Open World Survival","1 vs All","Escape","Utility & Other"];
 
-/* ---------- Curated catalog of big Roblox games ----------
-   (names + genres; `pop` is a rough popularity weight used only
-   for default ordering, not shown as a factual stat) */
-const CATALOG = [
-  ["Adopt Me!",["Roleplay & Avatar Sim","Pet Care","Social"],100],
-  ["Brookhaven RP",["Roleplay & Avatar Sim","Life","Social"],100],
-  ["Blox Fruits",["Action","Open World Action","Adventure"],98],
-  ["Tower of Hell",["Obby & Platformer","Tower Obby"],95],
-  ["Grow a Garden",["Simulation","Sandbox","Social"],95],
-  ["Steal a Brainrot",["Simulation","Party & Casual","Social"],93],
-  ["Murder Mystery 2",["Party & Casual","Minigame","Survival"],92],
-  ["MeepCity",["Roleplay & Avatar Sim","Social","Life"],90],
-  ["Pet Simulator 99",["Simulation","Incremental Simulator","Pet Care"],90],
-  ["Pet Simulator X",["Simulation","Incremental Simulator","Pet Care"],88],
-  ["Welcome to Bloxburg",["Roleplay & Avatar Sim","Life","Building"],90],
-  ["Jailbreak",["Action","Open World Action","Racing"],88],
-  ["Royale High",["Roleplay & Avatar Sim","Dress Up","Adventure"],88],
-  ["Doors",["Survival","Horror","Puzzle"],90],
-  ["Piggy",["Survival","Horror","Puzzle"],85],
-  ["Arsenal",["Shooter","Deathmatch"],82],
-  ["Phantom Forces",["Shooter","Tactical Shooter"],78],
-  ["Bee Swarm Simulator",["Simulation","Adventure","Pet Care"],80],
-  ["Work at a Pizza Place",["Roleplay & Avatar Sim","Life","Party & Casual"],80],
-  ["Natural Disaster Survival",["Survival","Party & Casual"],78],
-  ["Theme Park Tycoon 2",["Simulation","Tycoon"],78],
-  ["Retail Tycoon 2",["Simulation","Tycoon"],74],
-  ["Lumber Tycoon 2",["Simulation","Tycoon","Sandbox"],74],
-  ["Tower Defense Simulator",["Strategy","Tower Defense"],82],
-  ["All Star Tower Defense",["Strategy","Tower Defense"],80],
-  ["Anime Adventures",["Strategy","Tower Defense"],76],
-  ["Toilet Tower Defense",["Strategy","Tower Defense"],78],
-  ["Rivals",["Shooter","Deathmatch","Tactical Shooter"],84],
-  ["Fisch",["Simulation","Adventure","Social"],86],
-  ["Dress to Impress",["Party & Casual","Dress Up","Social"],88],
-  ["99 Nights in the Forest",["Survival","Open World Survival","Horror"],84],
-  ["Shindo Life",["Action","Open World Action","Battlegrounds & Fighting"],80],
-  ["The Strongest Battlegrounds",["Action","Battlegrounds & Fighting"],85],
-  ["Untitled Boxing Game",["Action","Battlegrounds & Fighting"],80],
-  ["Da Hood",["Action","Open World Action","Roleplay & Avatar Sim"],80],
-  ["Build A Boat For Treasure",["Adventure","Sandbox","Puzzle"],78],
-  ["Speed Run 4",["Obby & Platformer","Runner"],72],
-  ["Flee the Facility",["Survival","Party & Casual","Horror"],78],
-  ["Super Golf",["Sports & Racing","Sports","Party & Casual"],72],
-  ["Islands",["Simulation","Sandbox","Survival"],76],
-  ["Pls Donate",["Social","Chat & Hangout","Shopping"],80],
-  ["Vehicle Legends",["Sports & Racing","Racing","Roleplay & Avatar Sim"],72],
-  ["Driving Empire",["Sports & Racing","Racing","Roleplay & Avatar Sim"],72],
-  ["Car Dealership Tycoon",["Simulation","Tycoon","Vehicle Sim"],72],
-  ["Greenville",["Roleplay & Avatar Sim","Life","Vehicle Sim"],72],
-  ["Emergency Response: Liberty County",["Roleplay & Avatar Sim","Life","Vehicle Sim"],74],
-  ["Mad City",["Action","Open World Action"],72],
-  ["Ninja Legends",["Simulation","Incremental Simulator"],68],
-  ["Mining Simulator 2",["Simulation","Incremental Simulator"],68],
-  ["Blox Fruits (Fan)",["Action","Adventure"],50],
-  ["King Legacy",["Action","Open World Action","Adventure"],74],
-  ["A One Piece Game",["Action","Open World Action","Battlegrounds & Fighting"],72],
-  ["Anime Fighting Simulator",["Simulation","Battlegrounds & Fighting"],70],
-  ["Anime Fighters Simulator",["Simulation","Incremental Simulator"],68],
-  ["Sonic Speed Simulator",["Simulation","Runner"],66],
-  ["Ultimate Football",["Sports & Racing","Sports"],74],
-  ["Football Fusion 2",["Sports & Racing","Sports"],72],
-  ["Hoopz",["Sports & Racing","Sports"],68],
-  ["TSB (The Strongest)",["Action","Battlegrounds & Fighting"],60],
-  ["Blade Ball",["Action","Battlegrounds & Fighting"],82],
-  ["Combat Warriors",["Action","Battlegrounds & Fighting","Deathmatch"],74],
-  ["Evade",["Survival","Horror","1 vs All"],80],
-  ["Apeirophobia",["Survival","Horror","Puzzle"],74],
-  ["The Mimic",["Survival","Horror","Story"],76],
-  ["Rainbow Friends (RP)",["Roleplay & Avatar Sim","Survival","Horror"],74],
-  ["Break In (Story)",["Adventure","Story","Party & Casual"],70],
-  ["Camping",["Adventure","Story","Horror"],66],
-  ["Scary Elevator",["Party & Casual","Horror","Minigame"],62],
-  ["3008",["Survival","Open World Survival","Sandbox"],72],
-  ["Pressure",["Survival","Horror","Puzzle"],76],
-  ["Dead Rails",["Survival","Open World Survival","Horror"],78],
-  ["Sols RNG",["RNG","Idle"],78],
-  ["Fisch (RNG)",["RNG","Simulation"],50],
-  ["Hatch a Pet",["RNG","Pet Care","Simulation"],60],
-  ["Bubble Gum Simulator",["Simulation","Incremental Simulator","Pet Care"],70],
-  ["Clicker Simulator",["Simulation","Tapping","Incremental Simulator"],62],
-  ["Tapping Legends X",["Simulation","Tapping"],58],
-  ["Blox Cards",["Strategy","Board & Card"],52],
-  ["Chess (Roblox)",["Strategy","Board & Card"],54],
-  ["Catalog Avatar Creator",["Social","Showcase","Dress Up"],70],
-  ["Would You Rather",["Party & Casual","Quiz"],66],
-  ["Guess the Drawing",["Party & Casual","Quiz","Coloring & Drawing"],60],
-  ["Trivia Simulator",["Party & Casual","Quiz"],54],
-  ["Escape Grandma's House",["Puzzle","Escape Room"],66],
-  ["Escape the Backrooms",["Puzzle","Escape Room","Horror"],70],
-  ["Find the Markers",["Puzzle","Hidden Object","Exploration"],68],
-  ["Find the Memes",["Puzzle","Hidden Object"],64],
-  ["Hide and Seek Extreme",["Party & Casual","Minigame"],62],
-  ["Epic Minigames",["Party & Casual","Minigame"],72],
-  ["Super Bomb Survival",["Party & Casual","Minigame","Survival"],60],
-  ["Deathrun",["Party & Casual","Minigame","Obby & Platformer"],64],
-  ["Mega Easy Obby",["Obby & Platformer","Classic Obby"],58],
-  ["Escape Running Obby",["Obby & Platformer","Runner"],56],
-  ["Rainbow Obby",["Obby & Platformer","Classic Obby"],58],
-  ["Barry's Prison Run",["Obby & Platformer","Runner","Story"],64],
-  ["Theme Park Obby",["Obby & Platformer","Classic Obby"],52],
-  ["BedWars",["Strategy","Battlegrounds & Fighting","Survival"],82],
-  ["Islands of Move",["Party & Casual","Minigame"],54],
-  ["Skywars",["Shooter","Deathmatch","Strategy"],64],
-  ["Bad Business",["Shooter","Tactical Shooter","Deathmatch"],66],
-  ["Big Paintball",["Shooter","Deathmatch","Party & Casual"],66],
-  ["Zombie Attack",["Shooter","PvE Shooter"],58],
-  ["Alone in a Dark House",["Survival","Horror","Story"],62],
-  ["Weight Lifting Simulator",["Simulation","Incremental Simulator"],60],
-  ["Strongman Simulator",["Simulation","Incremental Simulator"],58],
-  ["Saber Simulator",["Simulation","Incremental Simulator","Battlegrounds & Fighting"],60],
-  ["Pet Catchers",["Simulation","Pet Care","RNG"],62],
-  ["My Restaurant",["Simulation","Tycoon"],66],
-  ["Restaurant Tycoon 2",["Simulation","Tycoon"],68],
-  ["My Farm",["Simulation","Tycoon","Sandbox"],58],
-  ["Livetopia",["Roleplay & Avatar Sim","Life","Social"],72],
-  ["Berry Avenue RP",["Roleplay & Avatar Sim","Life","Social"],72],
-  ["Horse Life",["Roleplay & Avatar Sim","Animal Sim","Pet Care"],66],
-  ["Wild Horse Islands",["Roleplay & Avatar Sim","Animal Sim","Adventure"],64],
-  ["Feather Family",["Roleplay & Avatar Sim","Animal Sim"],62],
-  ["Creatures of Sonaria",["Roleplay & Avatar Sim","Animal Sim","Survival"],70],
-  ["Dragon Adventures",["Roleplay & Avatar Sim","Animal Sim","Adventure"],68],
-  ["Bubble Gum Clicker",["Simulation","Tapping","Incremental Simulator"],56]
+/* ---------- Curated genre map (gives tags + powers recommendations) ---------- */
+const CURATED = [
+  ["Adopt Me",["Roleplay & Avatar Sim","Pet Care","Social"]],["Brookhaven",["Roleplay & Avatar Sim","Life","Social"]],
+  ["Blox Fruits",["Action","Open World Action","Adventure"]],["Tower of Hell",["Obby & Platformer","Tower Obby"]],
+  ["Grow a Garden",["Simulation","Sandbox","Social"]],["Steal a Brainrot",["Simulation","Party & Casual","Social"]],
+  ["Steal An Egg",["Simulation","Party & Casual","Social"]],["Murder Mystery 2",["Party & Casual","Minigame","Survival"]],
+  ["MeepCity",["Roleplay & Avatar Sim","Social","Life"]],["Pet Simulator 99",["Simulation","Incremental Simulator","Pet Care"]],
+  ["Pet Simulator X",["Simulation","Incremental Simulator","Pet Care"]],["Bloxburg",["Roleplay & Avatar Sim","Life"]],
+  ["Jailbreak",["Action","Open World Action","Racing"]],["Royale High",["Roleplay & Avatar Sim","Dress Up","Adventure"]],
+  ["Doors",["Survival","Horror","Puzzle"]],["Piggy",["Survival","Horror","Puzzle"]],["Arsenal",["Shooter","Deathmatch"]],
+  ["Phantom Forces",["Shooter","Tactical Shooter"]],["Bee Swarm",["Simulation","Adventure","Pet Care"]],
+  ["Work at a Pizza Place",["Roleplay & Avatar Sim","Life","Party & Casual"]],["Natural Disaster Survival",["Survival","Party & Casual"]],
+  ["Theme Park Tycoon",["Simulation","Tycoon"]],["Retail Tycoon",["Simulation","Tycoon"]],["Lumber Tycoon",["Simulation","Tycoon","Sandbox"]],
+  ["Tower Defense Simulator",["Strategy","Tower Defense"]],["All Star Tower Defense",["Strategy","Tower Defense"]],
+  ["Anime Adventures",["Strategy","Tower Defense"]],["Toilet Tower Defense",["Strategy","Tower Defense"]],
+  ["Rivals",["Shooter","Deathmatch","Tactical Shooter"]],["Fisch",["Simulation","Adventure","Social"]],
+  ["Dress to Impress",["Party & Casual","Dress Up","Social"]],["99 Nights in the Forest",["Survival","Open World Survival","Horror"]],
+  ["Shindo Life",["Action","Open World Action","Battlegrounds & Fighting"]],["The Strongest Battlegrounds",["Action","Battlegrounds & Fighting"]],
+  ["Untitled Boxing Game",["Action","Battlegrounds & Fighting"]],["Da Hood",["Action","Open World Action","Roleplay & Avatar Sim"]],
+  ["Build A Boat",["Adventure","Sandbox","Puzzle"]],["Flee the Facility",["Survival","Party & Casual","Horror"]],
+  ["Islands",["Simulation","Sandbox","Survival"]],["Pls Donate",["Social","Chat & Hangout","Shopping"]],
+  ["Driving Empire",["Sports & Racing","Racing","Roleplay & Avatar Sim"]],["Car Dealership Tycoon",["Simulation","Tycoon","Vehicle Sim"]],
+  ["Greenville",["Roleplay & Avatar Sim","Life","Vehicle Sim"]],["Emergency Response",["Roleplay & Avatar Sim","Life","Vehicle Sim"]],
+  ["Mad City",["Action","Open World Action"]],["King Legacy",["Action","Open World Action","Adventure"]],
+  ["Blade Ball",["Action","Battlegrounds & Fighting"]],["Combat Warriors",["Action","Battlegrounds & Fighting","Deathmatch"]],
+  ["Evade",["Survival","Horror","1 vs All"]],["Apeirophobia",["Survival","Horror","Puzzle"]],["The Mimic",["Survival","Horror","Story"]],
+  ["Rainbow Friends",["Roleplay & Avatar Sim","Survival","Horror"]],["Pressure",["Survival","Horror","Puzzle"]],
+  ["Dead Rails",["Survival","Open World Survival","Horror"]],["Sols RNG",["RNG","Idle"]],["Dandy",["Survival","Horror","1 vs All"]],
+  ["BedWars",["Strategy","Battlegrounds & Fighting","Survival"]],["Bubble Gum Simulator",["Simulation","Incremental Simulator","Pet Care"]],
+  ["Epic Minigames",["Party & Casual","Minigame"]],["Ultimate Football",["Sports & Racing","Sports"]],
+  ["Football Fusion",["Sports & Racing","Sports"]],["A One Piece Game",["Action","Open World Action","Battlegrounds & Fighting"]],
+  ["Jujutsu Shenanigans",["Action","Battlegrounds & Fighting","Anime"]],["Anime Fighting Simulator",["Simulation","Battlegrounds & Fighting"]],
+  ["Livetopia",["Roleplay & Avatar Sim","Life","Social"]],["Berry Avenue",["Roleplay & Avatar Sim","Life","Social"]],
+  ["Horse Life",["Roleplay & Avatar Sim","Animal Sim","Pet Care"]],["Creatures of Sonaria",["Roleplay & Avatar Sim","Animal Sim","Survival"]],
+  ["Dragon Adventures",["Roleplay & Avatar Sim","Animal Sim","Adventure"]]
 ];
+function cleanName(s){ return String(s).toLowerCase().replace(/[^a-z0-9]/g,""); }
+const CURATED_CLEAN = CURATED.map(([n,g])=>[cleanName(n),g]).sort((a,b)=>b[0].length-a[0].length);
+function genresFor(name){ const c=cleanName(name); for(const [k,g] of CURATED_CLEAN){ if(c.includes(k)) return g.slice(); } return []; }
+// recommendation pool from curated (name + genres), de-duplicated
+const RECPOOL = CURATED.map(([n,g])=>({name:n,genres:g}));
+
+/* ---------- Games catalog (loaded from games.json) ---------- */
+let GAMES=[]; let GAMEIDX={};
+async function loadGames(){
+  try{
+    const r=await fetch("games.json"); const d=await r.json();
+    GAMES=(d.games||[]).map(([id,name,ccu,thumb])=>({id,name,ccu,thumb,genres:genresFor(name)}));
+  }catch(e){ GAMES=RECPOOL.map((g,i)=>({id:0,name:g.name,ccu:0,thumb:"",genres:g.genres})); }
+  GAMEIDX={}; GAMES.forEach(g=>GAMEIDX[g.name.toLowerCase()]=g);
+  document.getElementById("gameNames").innerHTML=GAMES.slice(0,1200).map(g=>'<option value="'+esc(g.name)+'">').join("");
+}
 
 /* ---------- Store (API when configured, else localStorage) ---------- */
-const LS_KEY="reviewblox_v2";
-let state={ reviews:[], critics:[], favorites:[] };
-const online = !!API_BASE;
+const LS_KEY="reviewblox_v3", SES_KEY="reviewblox_session";
+let state={ reviews:[], critics:[], favorites:[], accounts:{} };
+let session=null;
+const online=!!API_BASE;
 
-function saveLocal(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
-function loadLocal(){ try{ const d=JSON.parse(localStorage.getItem(LS_KEY)); if(d){ state.reviews=d.reviews||[]; state.critics=d.critics||[]; state.favorites=d.favorites||[]; } }catch(e){} }
+function saveLocal(){ try{ localStorage.setItem(LS_KEY,JSON.stringify(state)); }catch(e){} }
+function loadLocal(){ try{ const d=JSON.parse(localStorage.getItem(LS_KEY)); if(d){ state.reviews=d.reviews||[]; state.critics=d.critics||[]; state.favorites=d.favorites||[]; state.accounts=d.accounts||{}; } }catch(e){} }
+function loadSession(){ try{ session=JSON.parse(localStorage.getItem(SES_KEY))||null; }catch(e){ session=null; } }
+function saveSession(){ try{ session?localStorage.setItem(SES_KEY,JSON.stringify(session)):localStorage.removeItem(SES_KEY); }catch(e){} }
 
-async function api(path,opts){ const r=await fetch(API_BASE+path,Object.assign({headers:{"Content-Type":"application/json"}},opts)); if(!r.ok) throw new Error("API "+r.status); return r.json(); }
+async function api(path,opts){ const r=await fetch(API_BASE+path,Object.assign({headers:{"Content-Type":"application/json"}},opts)); const j=await r.json().catch(()=>({})); if(!r.ok) throw new Error(j.error||("API "+r.status)); return j; }
+async function sha(s){ const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join(""); }
 
 async function boot(){
-  loadLocal(); // cache/fallback
+  loadLocal(); loadSession();
+  await loadGames();
   if(online){
-    try{
-      const d=await api("/api/state");
-      state.reviews=d.reviews||[]; state.critics=d.critics||[];
+    try{ const d=await api("/api/state"); state.reviews=d.reviews||[]; state.critics=d.critics||[]; saveLocal();
       document.getElementById("apiFlag").textContent="shared mode · live"; document.getElementById("apiFlag").classList.add("on");
-      saveLocal();
-    }catch(e){
-      document.getElementById("apiFlag").textContent="shared mode offline — showing local";
-    }
+    }catch(e){ document.getElementById("apiFlag").textContent="shared mode offline — showing local"; }
   }
-  buildDatalist(); route();
+  updateAcctUI(); route();
 }
 
-async function addReview(r){
-  if(online){ try{ const saved=await api("/api/reviews",{method:"POST",body:JSON.stringify(r)}); state.reviews.push(saved); saveLocal(); return; }catch(e){ alert("Couldn't reach the server; saved locally instead."); } }
-  state.reviews.push(r); saveLocal();
+/* ---------- auth ---------- */
+function isOwnerName(n){ return String(n||"").toLowerCase()===OWNER_USERNAME.toLowerCase(); }
+async function doLogin(username,password){
+  username=username.trim(); if(!username) throw new Error("Enter a username.");
+  if(online){
+    const u=await api("/api/login",{method:"POST",body:JSON.stringify({username,password})});
+    session={username:u.username,critic:!!u.critic,owner:!!u.owner,pw:password};
+  }else{
+    const key=username.toLowerCase(); const acct=state.accounts[key];
+    if(acct&&acct.password){ if((await sha(password))!==acct.password) throw new Error("Wrong password."); }
+    if(!acct){ const pw=(password&&password.toLowerCase()!=="none")?await sha(password):null; state.accounts[key]={username,password:pw,critic:isOwnerName(username)?1:0}; saveLocal(); }
+    const a=state.accounts[key];
+    session={username:a.username,critic:!!a.critic||isOwnerName(username),owner:isOwnerName(username)};
+    refreshLocalCritics();
+  }
+  saveSession(); updateAcctUI();
 }
-async function updateReview(id,patch){
-  const r=state.reviews.find(x=>x.id===id); if(!r) return; Object.assign(r,patch);
-  if(online){ try{ await api("/api/reviews/"+id,{method:"PATCH",body:JSON.stringify(patch)}); }catch(e){} }
-  saveLocal();
-}
-async function deleteReview(id){
-  state.reviews=state.reviews.filter(x=>x.id!==id);
-  if(online){ try{ await api("/api/reviews/"+id,{method:"DELETE"}); }catch(e){} }
-  saveLocal();
-}
-async function likeReview(id){
-  const r=state.reviews.find(x=>x.id===id); if(!r) return;
-  r.liked=!r.liked; r.likes=(r.likes||0)+(r.liked?1:-1); if(r.likes<0)r.likes=0;
-  if(online){ try{ await api("/api/reviews/"+id+"/like",{method:"POST",body:JSON.stringify({liked:r.liked})}); }catch(e){} }
-  saveLocal();
-}
-async function setCritics(list,adminKey){
-  if(online){ try{ await api("/api/critics",{method:"PUT",body:JSON.stringify({critics:list,adminKey})}); }catch(e){ alert("Server rejected the change (admin key?). Saved locally only."); } }
-  state.critics=list; saveLocal();
+function logout(){ session=null; saveSession(); updateAcctUI(); location.hash="#/"; }
+function refreshLocalCritics(){ state.critics=Object.values(state.accounts).filter(a=>a.critic).map(a=>a.username); if(!state.critics.some(isOwnerName)) {} saveLocal(); }
+
+async function promote(username,password,critic){
+  if(online){
+    await api("/api/admin/promote",{method:"POST",body:JSON.stringify({ownerUsername:session.username,ownerPassword:session.pw,username,password,critic})});
+    const d=await api("/api/state"); state.critics=d.critics||[]; saveLocal();
+  }else{
+    const key=username.trim().toLowerCase(); const pw=(password&&password.toLowerCase()!=="none")?await sha(password):null;
+    state.accounts[key]={username:username.trim(),password:pw,critic:critic?1:0}; refreshLocalCritics();
+  }
 }
 
-/* ---------- helpers ---------- */
+/* ---------- review ops ---------- */
 function esc(s){ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
 function slug(s){ return encodeURIComponent(s); }
+function fmt(n){ return n>=1000? n.toLocaleString():String(n); }
 function starStr(r){ let s=""; for(let i=1;i<=5;i++) s+= i<=Math.round(r)?"★":'<span class="off">★</span>'; return '<span class="starsm">'+s+"</span>"; }
-function isCritic(name){ return state.critics.some(c=>c.toLowerCase()===String(name).toLowerCase()); }
-function robloxUrl(name){ return "https://www.roblox.com/games/?keyword="+encodeURIComponent(name); }
+function isCritic(name){ return state.critics.some(c=>String(c).toLowerCase()===String(name).toLowerCase()); }
+function robloxUrl(g){ return g&&g.id? "https://www.roblox.com/games/"+g.id : "https://www.roblox.com/games/?keyword="+encodeURIComponent(g&&g.name||g); }
+function canEdit(r){ return session && (session.owner || String(session.username).toLowerCase()===String(r.author).toLowerCase()); }
 
-function catalogMap(){ const m={}; CATALOG.forEach(([n,g,p])=>m[n.toLowerCase()]={name:n,genres:g,pop:p}); return m; }
-const CAT=catalogMap();
-
-function allGames(){
-  // union of catalog + any reviewed game
-  const map={};
-  CATALOG.forEach(([n,g,p])=>{ map[n.toLowerCase()]={name:n,genres:g.slice(),pop:p,reviews:[]}; });
-  state.reviews.forEach(r=>{
-    const k=r.game.toLowerCase();
-    if(!map[k]) map[k]={name:r.game,genres:(r.genres||[]).slice(),pop:0,reviews:[]};
-    map[k].reviews.push(r);
-    (r.genres||[]).forEach(g=>{ if(!map[k].genres.includes(g)) map[k].genres.push(g); });
-  });
-  return Object.values(map).map(g=>{
-    const n=g.reviews.length;
-    g.avg = n? g.reviews.reduce((a,r)=>a+r.rating,0)/n : 0;
-    g.count=n;
-    return g;
-  });
+async function addReview(r){
+  if(online){ try{ const saved=await api("/api/reviews",{method:"POST",body:JSON.stringify(r)}); state.reviews.push(saved); saveLocal(); return; }catch(e){ alert("Couldn't reach the server; saved locally."); } }
+  state.reviews.push(r); saveLocal();
 }
-function gameByName(name){ return allGames().find(g=>g.name.toLowerCase()===name.toLowerCase()); }
+async function updateReview(id,patch){ const r=state.reviews.find(x=>x.id===id); if(!r)return; Object.assign(r,patch); if(online){try{await api("/api/reviews/"+id,{method:"PATCH",body:JSON.stringify(patch)});}catch(e){}} saveLocal(); }
+async function deleteReview(id){ state.reviews=state.reviews.filter(x=>x.id!==id); if(online){try{await api("/api/reviews/"+id,{method:"DELETE"});}catch(e){}} saveLocal(); }
+async function likeReview(id){ const r=state.reviews.find(x=>x.id===id); if(!r)return; r.liked=!r.liked; r.likes=(r.likes||0)+(r.liked?1:-1); if(r.likes<0)r.likes=0; if(online){try{await api("/api/reviews/"+id+"/like",{method:"POST",body:JSON.stringify({liked:r.liked})});}catch(e){}} saveLocal(); }
 
-function buildDatalist(){ document.getElementById("gameNames").innerHTML=CATALOG.map(c=>'<option value="'+esc(c[0])+'">').join(""); }
+/* ---------- game helpers ---------- */
+function reviewIndex(){ const m={}; state.reviews.forEach(r=>{ const k=r.game.toLowerCase(); (m[k]=m[k]||[]).push(r); }); return m; }
+function makeGame(g,rv){ const genres=(g.genres||[]).slice(); rv.forEach(r=>(r.genres||[]).forEach(x=>{if(!genres.includes(x))genres.push(x);})); const n=rv.length; return {id:g.id,name:g.name,ccu:g.ccu||0,thumb:g.thumb||"",genres,reviews:rv,count:n,avg:n?rv.reduce((a,r)=>a+r.rating,0)/n:0}; }
+function gameList(){ const idx=reviewIndex(); const list=GAMES.map(g=>makeGame(g,idx[g.name.toLowerCase()]||[])); const known=new Set(GAMES.map(g=>g.name.toLowerCase())); Object.keys(idx).forEach(k=>{ if(!known.has(k)){ list.push(makeGame({id:0,name:idx[k][0].game,ccu:0,thumb:"",genres:genresFor(idx[k][0].game)},idx[k])); } }); return list; }
+function getGame(name){ const idx=reviewIndex(); const rv=idx[name.toLowerCase()]||[]; const g=GAMEIDX[name.toLowerCase()]||{id:0,name,ccu:0,thumb:"",genres:genresFor(name)}; return makeGame(g,rv); }
+function reviewedGames(){ const idx=reviewIndex(); return Object.keys(idx).map(k=>getGame(idx[k][0].game)); }
 
 /* ---------- Router ---------- */
 function route(){
-  const h=location.hash.split("?")[0].replace(/^#\/?/,"");
-  const [path,rest]=h.split("/");
+  const h=location.hash.split("?")[0].replace(/^#\/?/,""); const [path,rest]=h.split("/");
   document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("active",(a.dataset.r||"")===path));
   const v=document.getElementById("view");
-  if(path==="" ) renderHome(v);
-  else if(path==="browse") renderBrowse(v);
-  else if(path==="game") renderGame(v,decodeURIComponent(rest||""));
-  else if(path==="write") renderWrite(v);
-  else if(path==="charts") renderCharts(v);
-  else if(path==="critics") renderCritics(v);
-  else if(path==="account") renderAccount(v);
-  else renderHome(v);
+  ({"":renderHome,browse:renderBrowse,game:v2=>renderGame(v,decodeURIComponent(rest||"")),write:renderWrite,charts:renderCharts,critics:renderCritics,account:renderAccount,login:renderLogin}[path]||renderHome)(v);
   window.scrollTo(0,0);
 }
 window.addEventListener("hashchange",route);
+function qparam(n){ const m=location.hash.match(new RegExp("[?&]"+n+"=([^&]+)")); return m?decodeURIComponent(m[1]):""; }
+document.getElementById("topSearch").addEventListener("keydown",e=>{ if(e.key==="Enter"){ const q=e.target.value.trim(); location.hash="#/browse"+(q?("?q="+encodeURIComponent(q)):""); } });
 
-/* top search */
-document.getElementById("topSearch").addEventListener("keydown",e=>{
-  if(e.key==="Enter"){ const q=e.target.value.trim(); location.hash="#/browse"+(q?("?q="+encodeURIComponent(q)):""); }
-});
-
-function qparam(name){ const m=location.hash.match(new RegExp("[?&]"+name+"=([^&]+)")); return m?decodeURIComponent(m[1]):""; }
+/* ---------- account chip ---------- */
+function updateAcctUI(){
+  const slot=document.getElementById("acctSlot");
+  if(session){ slot.innerHTML=`<span class="acctchip" onclick="location.hash='#/account'">👤 ${esc(session.username)}${session.owner?' <span class="badge">OWNER</span>':session.critic?' <span class="badge">✔</span>':''}</span>`; }
+  else{ slot.innerHTML=`<a onclick="location.hash='#/login'" data-r="login" style="color:var(--accent2)">Sign in</a>`; }
+}
 
 /* ---------- HOME ---------- */
 function renderHome(v){
-  const games=allGames();
-  const reviewed=games.filter(g=>g.count>0);
-  const trending=[...reviewed].sort((a,b)=>b.count-a.count).slice(0,6);
-  const topRated=[...reviewed].filter(g=>g.count>=1).sort((a,b)=>b.avg-a.avg||b.count-a.count).slice(0,6);
+  const rev=reviewedGames();
+  const trending=[...rev].sort((a,b)=>b.count-a.count).slice(0,6);
+  const topRated=[...rev].sort((a,b)=>b.avg-a.avg||b.count-a.count).slice(0,6);
   const latest=[...state.reviews].sort((a,b)=>b.date-a.date).slice(0,4);
-  const nReviews=state.reviews.length, nGames=reviewed.length;
-  const avg=nReviews?(state.reviews.reduce((a,r)=>a+r.rating,0)/nReviews):0;
-
+  const popular=GAMES.slice(0,12);
+  const n=state.reviews.length, avg=n?(state.reviews.reduce((a,r)=>a+r.rating,0)/n):0;
   v.innerHTML=`
-  <div class="hero">
-    <h1>Honest Roblox game reviews.</h1>
-    <p>Browse ${CATALOG.length}+ games, read & write reviews, and get recommendations.</p>
+  <div class="hero"><h1>Honest Roblox game reviews.</h1>
+    <p>${fmt(GAMES.length)} games · read & write reviews · get recommendations.</p>
     <button class="btn" onclick="location.hash='#/write'">✍️ Write a review</button>
-    <button class="btn blue" onclick="location.hash='#/browse'">🔎 Browse games</button>
-  </div>
+    <button class="btn blue" onclick="location.hash='#/browse'">🔎 Browse games</button></div>
   <div class="card"><div class="stat">
-    <div><b>${nReviews}</b><span>reviews</span></div>
-    <div><b>${nGames}</b><span>games reviewed</span></div>
-    <div><b>${avg?avg.toFixed(1):"—"}</b><span>avg rating</span></div>
-    <div><b>${state.critics.length}</b><span>pro critics</span></div>
+    <div><b>${n}</b><span>reviews</span></div><div><b>${rev.length}</b><span>games reviewed</span></div>
+    <div><b>${avg?avg.toFixed(1):"—"}</b><span>avg rating</span></div><div><b>${state.critics.length}</b><span>pro critics</span></div>
   </div></div>
-
-  ${trending.length?`<div class="section-h"><h2>🔥 Trending</h2><a href="#/browse">See all</a></div>
-   <div class="grid">${trending.map(gcard).join("")}</div>`:""}
-
-  ${topRated.length?`<div class="section-h"><h2>⭐ Top rated</h2></div>
-   <div class="grid">${topRated.map(gcard).join("")}</div>`:""}
-
+  ${trending.length?`<div class="section-h"><h2>🔥 Trending reviews</h2><a onclick="location.hash='#/browse'">See all</a></div><div class="grid">${trending.map(gcard).join("")}</div>`:""}
+  ${topRated.length?`<div class="section-h"><h2>⭐ Top rated</h2></div><div class="grid">${topRated.map(gcard).join("")}</div>`:""}
+  <div class="section-h"><h2>🎮 Most played right now</h2><a onclick="location.hash='#/browse'">Browse all</a></div>
+  <div class="grid">${popular.map(g=>gcard(makeGame(g,reviewIndex()[g.name.toLowerCase()]||[]))).join("")}</div>
   <div class="section-h"><h2>🕘 Latest reviews</h2></div>
-  ${latest.length? latest.map(reviewCard).join("") : '<div class="empty">No reviews yet. <button class="btn sm" onclick="location.hash=\'#/write\'">Be the first</button></div>'}
-
-  ${!reviewed.length?`<div class="section-h"><h2>🎮 Popular games to review</h2></div>
-   <div class="grid">${games.sort((a,b)=>b.pop-a.pop).slice(0,9).map(gcard).join("")}</div>`:""}
-  `;
+  ${latest.length? latest.map(reviewCard).join("") : '<div class="empty">No reviews yet. <button class="btn sm" onclick="location.hash=\'#/write\'">Be the first</button></div>'}`;
 }
 function gcard(g){
-  const rate = g.count? `${starStr(g.avg)} <span class="muted">${g.avg.toFixed(1)} · ${g.count} review${g.count>1?"s":""}</span>` : '<span class="muted">No reviews yet</span>';
-  return `<div class="gcard" onclick="location.hash='#/game/${slug(g.name)}'">
+  const rate=g.count? `${starStr(g.avg)} <span class="muted">${g.avg.toFixed(1)} · ${g.count}</span>` : '<span class="muted">No reviews</span>';
+  const thumb=g.thumb? `<img class="thumb" loading="lazy" src="${esc(g.thumb)}" alt="">` : `<div class="thumb"></div>`;
+  return `<div class="gcard" onclick="location.hash='#/game/${slug(g.name)}'">${thumb}<div class="body">
     <div class="gtitle">${esc(g.name)}</div>
-    <div class="gtags">${g.genres.map(esc).join(" · ")}</div>
-    <div class="grate">${rate}</div>
-  </div>`;
+    <div class="gtags">${g.genres.length?g.genres.map(esc).join(" · "):"&nbsp;"}</div>
+    <div class="grate">${rate}${g.ccu?`<span class="ccu">▶ ${fmt(g.ccu)}</span>`:""}</div></div></div>`;
 }
 
 /* ---------- BROWSE ---------- */
 function renderBrowse(v){
   const q0=qparam("q");
-  v.innerHTML=`
-    <div class="hero" style="padding-top:10px"><h1>Browse games</h1><p>Search our catalog or review any game by name.</p></div>
+  v.innerHTML=`<div class="hero" style="padding-top:10px"><h1>Browse games</h1><p>Search ${fmt(GAMES.length)} games, filter by tag, or review any game.</p></div>
     <div class="toolbar">
       <input id="bSearch" placeholder="Search game name or tag…" value="${esc(q0)}">
       <select id="bTag"><option value="">All tags</option>${OFFICIAL_TAGS.map(t=>`<option>${esc(t)}</option>`).join("")}</select>
-      <select id="bSort">
-        <option value="pop">Popular</option>
-        <option value="top">Top rated</option>
-        <option value="most">Most reviewed</option>
-        <option value="az">A–Z</option>
-      </select>
-    </div>
-    <div id="bResults"></div>`;
+      <select id="bSort"><option value="pop">Most played</option><option value="top">Top rated</option><option value="most">Most reviewed</option><option value="az">A–Z</option></select>
+    </div><div id="bResults"></div>`;
   const run=()=>{
     const q=document.getElementById("bSearch").value.toLowerCase().trim();
-    const tag=document.getElementById("bTag").value;
-    const sort=document.getElementById("bSort").value;
-    let list=allGames();
+    const tag=document.getElementById("bTag").value, sort=document.getElementById("bSort").value;
+    const idx=reviewIndex();
+    let base;
+    if(tag || sort!=="pop" || q){ base=gameList(); } else { base=GAMES.map(g=>makeGame(g,idx[g.name.toLowerCase()]||[])); }
+    let list=base;
     if(tag) list=list.filter(g=>g.genres.includes(tag));
     if(q) list=list.filter(g=>g.name.toLowerCase().includes(q)||g.genres.some(x=>x.toLowerCase().includes(q)));
-    list.sort((a,b)=>({pop:b.pop-a.pop||b.count-a.count, top:b.avg-a.avg||b.count-a.count, most:b.count-a.count, az:a.name.localeCompare(b.name)})[sort]);
-    const res=document.getElementById("bResults");
-    let html="";
+    list.sort((a,b)=>({pop:b.ccu-a.ccu||b.count-a.count,top:b.avg-a.avg||b.count-a.count,most:b.count-a.count,az:a.name.localeCompare(b.name)})[sort]);
+    const res=document.getElementById("bResults"); let html="";
     if(q && !list.some(g=>g.name.toLowerCase()===q)){
-      html+=`<div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-        <div>Can't find <strong>"${esc(q)}"</strong>? You can still review any Roblox game.</div>
-        <button class="btn sm blue" onclick="location.hash='#/write?g=${encodeURIComponent(document.getElementById('bSearch').value.trim())}'">Review "${esc(document.getElementById('bSearch').value.trim())}"</button></div>`;
+      const typed=document.getElementById("bSearch").value.trim();
+      html+=`<div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div>Want to review a game not listed? </div><button class="btn sm blue" onclick="location.hash='#/write?g=${encodeURIComponent(typed)}'">Review "${esc(typed)}"</button></div>`;
     }
-    html+= list.length? `<div class="grid">${list.slice(0,60).map(gcard).join("")}</div>` : '<div class="empty">No games match.</div>';
+    html+= list.length? `<div class="muted" style="margin-bottom:8px">${fmt(list.length)} game${list.length!==1?"s":""}</div><div class="grid">${list.slice(0,60).map(gcard).join("")}</div>` : '<div class="empty">No games match.</div>';
     res.innerHTML=html;
   };
-  document.getElementById("bSearch").oninput=run;
-  document.getElementById("bTag").onchange=run;
-  document.getElementById("bSort").onchange=run;
-  run();
+  document.getElementById("bSearch").oninput=run; document.getElementById("bTag").onchange=run; document.getElementById("bSort").onchange=run; run();
 }
 
 /* ---------- GAME DETAIL ---------- */
 function renderGame(v,name){
-  const g=gameByName(name) || {name,genres:(CAT[name.toLowerCase()]?.genres||[]),reviews:[],avg:0,count:0};
-  const reviews=[...(g.reviews||[])].sort((a,b)=>(isCritic(b.author)-isCritic(a.author))||b.date-a.date);
-  // rating distribution
-  const dist=[0,0,0,0,0]; reviews.forEach(r=>dist[r.rating-1]++);
-  const maxd=Math.max(1,...dist);
-  v.innerHTML=`
-    <span class="back" onclick="history.back()">← Back</span>
-    <div class="card">
-      <div class="gamehead">
-        <div>
-          <h2 style="margin:0 0 4px">${esc(g.name)}</h2>
-          <div class="chips">${g.genres.map(t=>'<span class="chip sm">'+esc(t)+'</span>').join("")}</div>
-          <div style="margin-top:8px"><a class="muted" href="${robloxUrl(g.name)}" target="_blank" rel="noopener">Open on Roblox ↗</a></div>
-        </div>
-        <div style="text-align:center">
-          <div class="big-rate">${g.count?g.avg.toFixed(1):"—"}</div>
-          <div>${g.count?starStr(g.avg):""}</div>
-          <div class="muted" style="font-size:.76rem">${g.count} review${g.count!==1?"s":""}</div>
-        </div>
+  const g=getGame(name);
+  const reviews=[...g.reviews].sort((a,b)=>(isCritic(b.author)-isCritic(a.author))||b.date-a.date);
+  const dist=[0,0,0,0,0]; reviews.forEach(r=>dist[r.rating-1]++); const maxd=Math.max(1,...dist);
+  const thumb=g.thumb?`<img src="${esc(g.thumb)}" alt="">`:"";
+  v.innerHTML=`<span class="back" onclick="history.back()">← Back</span>
+    <div class="card"><div class="gamehead">${thumb}
+      <div style="flex:1;min-width:180px">
+        <h2 style="margin:0 0 4px">${esc(g.name)}</h2>
+        <div class="chips">${g.genres.map(t=>'<span class="chip sm">'+esc(t)+'</span>').join("")||'<span class="muted" style="font-size:.8rem">No tags yet</span>'}</div>
+        <div style="margin-top:8px;display:flex;gap:14px;flex-wrap:wrap">
+          <a class="muted" href="${robloxUrl(g)}" target="_blank" rel="noopener">Open on Roblox ↗</a>
+          ${g.ccu?`<span class="ccu">▶ ${fmt(g.ccu)} playing now</span>`:""}</div>
       </div>
-      ${g.count?`<div style="margin-top:14px">${[5,4,3,2,1].map(s=>`
-        <div class="chartrow"><div class="lab">${s} ★</div><div class="bar"><i style="width:${Math.round(dist[s-1]/maxd*100)}%;background:var(--gold)"></i></div><div class="val">${dist[s-1]}</div></div>`).join("")}</div>`:""}
-      <button class="btn" onclick="location.hash='#/write?g=${slug(g.name)}'">Write a review for ${esc(g.name)}</button>
+      <div style="text-align:center"><div class="big-rate">${g.count?g.avg.toFixed(1):"—"}</div><div>${g.count?starStr(g.avg):""}</div><div class="muted" style="font-size:.76rem">${g.count} review${g.count!==1?"s":""}</div></div>
     </div>
+    ${g.count?`<div style="margin-top:14px">${[5,4,3,2,1].map(s=>`<div class="chartrow"><div class="lab" style="width:46px">${s} ★</div><div class="bar"><i style="width:${Math.round(dist[s-1]/maxd*100)}%;background:var(--gold)"></i></div><div class="val">${dist[s-1]}</div></div>`).join("")}</div>`:""}
+    <button class="btn" onclick="location.hash='#/write?g=${slug(g.name)}'">Write a review</button></div>
     <div class="section-h"><h2>Reviews</h2></div>
-    ${reviews.length? reviews.map(reviewCard).join("") : '<div class="empty">No reviews yet — be the first!</div>'}
-  `;
+    ${reviews.length? reviews.map(reviewCard).join("") : '<div class="empty">No reviews yet — be the first!</div>'}`;
 }
 
 /* ---------- REVIEW CARD ---------- */
 function reviewCard(r){
   const when=new Date(r.date).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
   const critic=isCritic(r.author)?'<span class="badge">✔ Pro Critic</span>':"";
-  return `<div class="review">
-    <div><a href="#/game/${slug(r.game)}" style="font-weight:800;font-size:1.05rem">${esc(r.game)}</a></div>
+  const ed=canEdit(r)?`<button onclick="onEdit('${r.id}')">✏️ Edit</button><button onclick="onDelete('${r.id}')">🗑 Delete</button>`:"";
+  return `<div class="review"><div><a href="#/game/${slug(r.game)}" style="font-weight:800;font-size:1.05rem">${esc(r.game)}</a></div>
     <div class="by">${starStr(r.rating)} · by ${esc(r.author)} ${critic} · ${when}${r.edited?" (edited)":""}</div>
     ${r.body?`<div class="body">${esc(r.body)}</div>`:""}
     <div class="chips">${(r.genres||[]).map(x=>'<span class="chip sm">'+esc(x)+'</span>').join("")}</div>
-    <div class="actions">
-      <button onclick="onLike('${r.id}')" class="${r.liked?'liked':''}">${r.liked?'❤️':'🤍'} ${r.likes||0}</button>
-      <button onclick="onEdit('${r.id}')">✏️ Edit</button>
-      <button onclick="onDelete('${r.id}')">🗑 Delete</button>
-    </div>
-  </div>`;
+    <div class="actions"><button onclick="onLike('${r.id}')" class="${r.liked?'liked':''}">${r.liked?'❤️':'🤍'} ${r.likes||0}</button>${ed}</div></div>`;
 }
 async function onLike(id){ await likeReview(id); route(); }
 async function onDelete(id){ if(confirm("Delete this review?")){ await deleteReview(id); route(); } }
@@ -501,185 +369,157 @@ function onEdit(id){ location.hash="#/write?edit="+id; }
 /* ---------- WRITE ---------- */
 let writeStars=0;
 function renderWrite(v){
-  const editId=qparam("edit");
-  const pre=qparam("g");
-  const editing = editId ? state.reviews.find(r=>r.id===editId) : null;
-  writeStars = editing? editing.rating : 0;
-  const curTags = editing? (editing.genres||[]) : (pre&&CAT[pre.toLowerCase()]?CAT[pre.toLowerCase()].genres:[]);
-  v.innerHTML=`
-    <span class="back" onclick="history.back()">← Back</span>
-    <div class="card">
-      <h2>${editing?"Edit review":"Write a review"}</h2>
-      <div class="row">
-        <div><label>Game name</label><input id="wName" list="gameNames" placeholder="Start typing…" value="${esc(editing?editing.game:pre)}"></div>
-        <div><label>Your name</label><input id="wAuthor" placeholder="Anonymous" value="${esc(editing?(editing.author==='Anonymous'?'':editing.author):'')}"></div>
-      </div>
-      <label>Your rating</label>
-      <div class="stars" id="starInput">${[1,2,3,4,5].map(i=>`<span data-v="${i}">★</span>`).join("")}</div>
-      <label>Tags <span class="muted">(official Roblox genres — click to toggle)</span></label>
+  if(!session){ v.innerHTML=`<div class="hero" style="padding-top:10px"><h1>Sign in to review</h1><p>You post reviews as your Roblox username.</p><button class="btn" onclick="location.hash='#/login'">Sign in</button></div>`; return; }
+  const editId=qparam("edit"), pre=qparam("g");
+  const editing=editId? state.reviews.find(r=>r.id===editId):null;
+  if(editing && !canEdit(editing)){ v.innerHTML='<div class="empty">You can only edit your own reviews.</div>'; return; }
+  writeStars=editing?editing.rating:0;
+  const curTags=editing?(editing.genres||[]).slice():(pre?genresFor(pre):[]);
+  v.innerHTML=`<span class="back" onclick="history.back()">← Back</span>
+    <div class="card"><h2>${editing?"Edit review":"Write a review"}</h2>
+      <div class="muted">Posting as <strong>${esc(session.username)}</strong>${session.critic?' <span class="badge">✔ Pro Critic</span>':""}</div>
+      <label>Game name</label><input id="wName" list="gameNames" placeholder="Start typing…" value="${esc(editing?editing.game:pre)}">
+      <label>Your rating</label><div class="stars" id="starInput">${[1,2,3,4,5].map(i=>`<span data-v="${i}">★</span>`).join("")}</div>
+      <label>Tags <span class="muted">(official Roblox genres)</span></label>
       <input id="tagFilter" placeholder="Filter tags…" style="margin-bottom:6px">
       <div class="chips" id="tagPicker" style="max-height:170px;overflow:auto"></div>
-      <label>Your review</label>
-      <textarea id="wBody" placeholder="What's good, what's not, who's it for?">${esc(editing?editing.body||"":"")}</textarea>
-      <button class="btn" id="saveBtn">${editing?"Save changes":"Publish review"}</button>
-    </div>`;
-  // stars
-  const si=document.getElementById("starInput");
-  const paint=n=>si.querySelectorAll("span").forEach(s=>s.classList.toggle("on",+s.dataset.v<=n));
-  si.querySelectorAll("span").forEach(s=>{ s.onmouseenter=()=>paint(+s.dataset.v); s.onclick=()=>{writeStars=+s.dataset.v;paint(writeStars);}; });
-  si.onmouseleave=()=>paint(writeStars); paint(writeStars);
-  // tags
+      <label>Your review</label><textarea id="wBody" placeholder="What's good, what's not, who's it for?">${esc(editing?editing.body||"":"")}</textarea>
+      <button class="btn" id="saveBtn">${editing?"Save changes":"Publish review"}</button></div>`;
+  const si=document.getElementById("starInput"); const paint=n=>si.querySelectorAll("span").forEach(s=>s.classList.toggle("on",+s.dataset.v<=n));
+  si.querySelectorAll("span").forEach(s=>{s.onmouseenter=()=>paint(+s.dataset.v);s.onclick=()=>{writeStars=+s.dataset.v;paint(writeStars);};}); si.onmouseleave=()=>paint(writeStars); paint(writeStars);
   const tp=document.getElementById("tagPicker");
-  const renderTags=(f="")=>{ tp.innerHTML=OFFICIAL_TAGS.filter(t=>t.toLowerCase().includes(f.toLowerCase())).map(t=>`<span class="chip${curTags.includes(t)?' on':''}" data-t="${esc(t)}">${esc(t)}</span>`).join("");
-    tp.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{ const t=c.dataset.t; const i=curTags.indexOf(t); if(i<0)curTags.push(t); else curTags.splice(i,1); c.classList.toggle("on"); }); };
-  renderTags();
-  document.getElementById("tagFilter").oninput=e=>renderTags(e.target.value);
-  // save
+  const rt=(f="")=>{ tp.innerHTML=OFFICIAL_TAGS.filter(t=>t.toLowerCase().includes(f.toLowerCase())).map(t=>`<span class="chip${curTags.includes(t)?' on':''}" data-t="${esc(t)}">${esc(t)}</span>`).join(""); tp.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{const t=c.dataset.t,i=curTags.indexOf(t); if(i<0)curTags.push(t);else curTags.splice(i,1); c.classList.toggle("on");}); };
+  rt(); document.getElementById("tagFilter").oninput=e=>rt(e.target.value);
   document.getElementById("saveBtn").onclick=async()=>{
-    const name=document.getElementById("wName").value.trim();
-    const body=document.getElementById("wBody").value.trim();
-    const author=document.getElementById("wAuthor").value.trim()||"Anonymous";
-    if(!name) return alert("Enter a game name.");
-    if(!writeStars) return alert("Pick a star rating.");
-    if(editing){ await updateReview(editId,{game:name,author,rating:writeStars,genres:curTags.slice(),body,edited:Date.now()}); location.hash="#/game/"+slug(name); }
-    else { await addReview({id:uid(),game:name,author,rating:writeStars,genres:curTags.slice(),body,likes:0,liked:false,date:Date.now()}); location.hash="#/game/"+slug(name); }
+    const name=document.getElementById("wName").value.trim(), body=document.getElementById("wBody").value.trim();
+    if(!name)return alert("Enter a game name."); if(!writeStars)return alert("Pick a star rating.");
+    if(editing){ await updateReview(editId,{game:name,rating:writeStars,genres:curTags.slice(),body,edited:Date.now()}); }
+    else{ await addReview({id:uid(),game:name,author:session.username,rating:writeStars,genres:curTags.slice(),body,likes:0,liked:false,date:Date.now()}); }
+    location.hash="#/game/"+slug(name);
   };
 }
 
-/* ---------- CHARTS ---------- */
-function renderCharts(v){
-  const reviews=state.reviews;
-  if(!reviews.length){ v.innerHTML='<div class="hero"><h1>Charts</h1></div><div class="empty">No data yet. Write some reviews to see charts.</div>'; return; }
-  // rating distribution
-  const dist=[0,0,0,0,0]; reviews.forEach(r=>dist[r.rating-1]++); const maxd=Math.max(...dist);
-  // genre counts
-  const gc={}; reviews.forEach(r=>(r.genres||[]).forEach(g=>gc[g]=(gc[g]||0)+1));
-  const genres=Object.entries(gc).sort((a,b)=>b[1]-a[1]).slice(0,10); const maxg=Math.max(1,...genres.map(x=>x[1]));
-  // top rated games (min 1 review)
-  const games=allGames().filter(g=>g.count>0).sort((a,b)=>b.avg-a.avg||b.count-a.count).slice(0,10); const maxa=5;
-  // critic vs community
-  const crit=reviews.filter(r=>isCritic(r.author)), comm=reviews.filter(r=>!isCritic(r.author));
-  const cavg=crit.length?crit.reduce((a,r)=>a+r.rating,0)/crit.length:0;
-  const uavg=comm.length?comm.reduce((a,r)=>a+r.rating,0)/comm.length:0;
-
-  v.innerHTML=`
-    <div class="hero" style="padding-top:10px"><h1>📊 Charts</h1></div>
-    <div class="card"><h2>Rating distribution</h2>
-      ${[5,4,3,2,1].map(s=>`<div class="chartrow"><div class="lab">${s} ★</div><div class="bar"><i style="width:${Math.round(dist[s-1]/Math.max(1,maxd)*100)}%;background:var(--gold)"></i></div><div class="val">${dist[s-1]}</div></div>`).join("")}
-    </div>
-    <div class="card"><h2>Reviews by tag</h2>
-      ${genres.map(([g,n])=>`<div class="chartrow"><div class="lab">${esc(g)}</div><div class="bar"><i style="width:${Math.round(n/maxg*100)}%"></i></div><div class="val">${n}</div></div>`).join("")}
-    </div>
-    <div class="card"><h2>Top rated games</h2>
-      ${games.map(g=>`<div class="chartrow"><div class="lab">${esc(g.name)}</div><div class="bar"><i style="width:${Math.round(g.avg/maxa*100)}%;background:var(--green)"></i></div><div class="val">${g.avg.toFixed(1)}</div></div>`).join("")}
-    </div>
-    ${crit.length?`<div class="card"><h2>Critics vs community</h2>
-      <div class="chartrow"><div class="lab">Pro critics</div><div class="bar"><i style="width:${Math.round(cavg/5*100)}%;background:var(--purple)"></i></div><div class="val">${cavg.toFixed(1)}</div></div>
-      <div class="chartrow"><div class="lab">Community</div><div class="bar"><i style="width:${Math.round(uavg/5*100)}%"></i></div><div class="val">${uavg.toFixed(1)}</div></div>
-    </div>`:""}
-  `;
-}
-
-/* ---------- CRITICS ---------- */
-function renderCritics(v){
-  v.innerHTML=`
-    <div class="hero" style="padding-top:10px"><h1>⭐ Professional Critics</h1><p>Verified reviewers whose takes carry a badge and extra weight.</p></div>
-    <div class="card">
-      <h2>Current critics <span class="muted">(${state.critics.length})</span></h2>
-      <div id="critList">${state.critics.length? state.critics.map(c=>`<div class="review" style="display:flex;justify-content:space-between;align-items:center"><div><strong>${esc(c)}</strong> <span class="badge">✔ Pro Critic</span></div><button class="btn alt sm" onclick="removeCritic('${esc(c).replace(/'/g,"\\'")}')">Remove</button></div>`).join("") : '<div class="muted">No critics yet.</div>'}</div>
-    </div>
-    <div class="card">
-      <h2>Promote a reviewer</h2>
-      <label>Reviewer name (exactly as they sign reviews)</label>
-      <input id="critName" placeholder="e.g. BloxCritic99">
-      ${online?`<label>Admin key</label><input id="adminKey" type="password" placeholder="owner admin key">`:""}
-      <button class="btn" onclick="addCritic()">Make Professional Critic</button>
-      <div class="note">${online?"Promotions are saved to the shared server and require the owner's admin key.":"Local mode: critic badges apply only in this browser. Connect the backend to make them real & shared."}</div>
+/* ---------- LOGIN ---------- */
+function renderLogin(v){
+  if(session){ location.hash="#/account"; return; }
+  v.innerHTML=`<div class="hero" style="padding-top:10px"><h1>Sign in</h1><p>Enter your Roblox username to review as yourself.</p></div>
+    <div class="card" style="max-width:440px;margin:0 auto">
+      <label>Roblox username</label><input id="liUser" placeholder="e.g. builderman">
+      <label>Password</label><input id="liPass" type="password" placeholder="Type 'none' if you don't have one">
+      <button class="btn" id="liBtn" style="width:100%">Sign in</button>
+      <div id="liErr" style="color:var(--accent);font-size:.85rem;margin-top:10px"></div>
+      <div class="note"><strong>Trust-based login:</strong> most people just type their username and <strong>none</strong> as the password. Only <strong>Pro Critics</strong> and the owner have a real password (given to them by the owner). There's no email or verification — it's an honor system.</div>
     </div>`;
+  const go=async()=>{ try{ await doLogin(document.getElementById("liUser").value,document.getElementById("liPass").value); location.hash="#/account"; }catch(e){ document.getElementById("liErr").textContent=e.message; } };
+  document.getElementById("liBtn").onclick=go;
+  document.getElementById("liPass").addEventListener("keydown",e=>{if(e.key==="Enter")go();});
 }
-async function addCritic(){
-  const name=document.getElementById("critName").value.trim(); if(!name)return alert("Enter a name.");
-  if(isCritic(name))return alert("Already a critic.");
-  const key=online?document.getElementById("adminKey").value.trim():"";
-  await setCritics([...state.critics,name],key); route();
-}
-async function removeCritic(name){
-  const key=online?prompt("Admin key to remove a critic:"):""; if(online&&!key)return;
-  await setCritics(state.critics.filter(c=>c.toLowerCase()!==name.toLowerCase()),key); route();
+
+/* ---------- CRITICS (public list) ---------- */
+function renderCritics(v){
+  const critics=state.critics.filter(c=>!isOwnerName(c));
+  v.innerHTML=`<div class="hero" style="padding-top:10px"><h1>⭐ Professional Critics</h1><p>Verified reviewers. Their takes carry a badge and extra weight in recommendations.</p></div>
+    <div class="card"><h2>Current critics <span class="muted">(${critics.length})</span></h2>
+    ${critics.length? critics.map(c=>`<div class="review" style="display:flex;justify-content:space-between;align-items:center"><div><strong>${esc(c)}</strong> <span class="badge">✔ Pro Critic</span></div><a class="muted" onclick="location.hash='#/browse?q=${encodeURIComponent(c)}'" style="cursor:pointer">see reviews →</a></div>`).join("") : '<div class="muted">No critics yet. The owner can promote reviewers from their Account page.</div>'}</div>
+    ${session&&session.owner?'<div class="card"><button class="btn" onclick="location.hash=\'#/account\'">Open owner panel to promote critics →</button></div>':""}`;
 }
 
 /* ---------- ACCOUNT ---------- */
 function renderAccount(v){
-  v.innerHTML=`
-    <div class="hero" style="padding-top:10px"><h1>Account</h1></div>
-    <div class="card">
-      <h2>Recommended for you</h2>
-      <p class="muted" id="tasteSummary"></p>
-      <div id="tasteBars"></div>
-      <div id="recList"></div>
-    </div>
-    <div class="card">
-      <h2>Link your Roblox account</h2>
-      <label>Roblox username</label><input id="rbxUser" placeholder="e.g. builderman">
-      <button class="btn" id="linkBtn">Import my favorite games</button>
-      <div class="note"><strong>How this works:</strong> Roblox has no public API for games you've <em>played</em>, so this imports the games you've publicly <strong>favorited</strong> and uses them to boost your recommendations. If Roblox blocks the request (CORS), your reviews still power recommendations.</div>
-      <div id="linkStatus" class="muted" style="margin-top:12px"></div><div id="favList" style="margin-top:10px"></div>
-    </div>
-    <div class="card">
-      <h2>Your data</h2>
-      <p class="muted">${online?"Reviews are shared via the server.":"Reviews are stored locally in this browser."} Favorites & likes are stored locally.</p>
-      <button class="btn alt" onclick="exportData()">Export (JSON)</button>
-      <button class="btn alt" onclick="clearData()">Clear local data</button>
-    </div>`;
+  if(!session){ location.hash="#/login"; return; }
+  const myReviews=state.reviews.filter(r=>String(r.author).toLowerCase()===String(session.username).toLowerCase()).sort((a,b)=>b.date-a.date);
+  v.innerHTML=`<div class="hero" style="padding-top:10px"><h1>👤 ${esc(session.username)}</h1>
+    <p>${session.owner?'<span class="badge">OWNER</span>':session.critic?'<span class="badge">✔ Pro Critic</span>':'Community reviewer'} · <a onclick="logout()" style="cursor:pointer;color:var(--accent2)">Sign out</a></p></div>
+
+    ${session.owner?ownerPanel():""}
+
+    <div class="card"><h2>Recommended for you</h2><p class="muted" id="tasteSummary"></p><div id="tasteBars"></div><div id="recList"></div></div>
+
+    <div class="card"><h2>Link your Roblox favorites</h2>
+      <label>Roblox username</label><input id="rbxUser" placeholder="${esc(session.username)}" value="${esc(session.username)}">
+      <button class="btn" id="linkBtn">Import favorites</button>
+      <div class="note">Imports your public <strong>favorited</strong> games to improve recommendations. Roblox has no public API for games you've <em>played</em>, and this may be CORS-blocked.</div>
+      <div id="linkStatus" class="muted" style="margin-top:12px"></div><div id="favList" style="margin-top:10px"></div></div>
+
+    <div class="card"><h2>Your reviews <span class="muted">(${myReviews.length})</span></h2>
+      ${myReviews.length? myReviews.map(reviewCard).join("") : '<div class="muted">No reviews from you yet.</div>'}</div>
+
+    <div class="card"><h2>Data</h2><button class="btn alt" onclick="exportData()">Export (JSON)</button> <button class="btn alt" onclick="clearData()">Clear local data</button></div>`;
   renderRecsInto();
   document.getElementById("linkBtn").onclick=linkRoblox;
+  if(session.owner) wireOwnerPanel();
 }
-function buildTaste(){
-  const w={};
-  state.reviews.forEach(r=>{ const weight=(r.rating-2.5)*(isCritic(r.author)?1.5:1); (r.genres||[]).forEach(g=>w[g]=(w[g]||0)+weight); });
-  state.favorites.forEach(f=>{ const c=CAT[f.toLowerCase()]; if(c)c.genres.forEach(g=>w[g]=(w[g]||0)+0.75); });
-  return w;
+function ownerPanel(){
+  const critics=state.critics.filter(c=>!isOwnerName(c));
+  return `<div class="card" style="border-color:var(--purple)">
+    <h2>⚙️ Owner panel — promote critics</h2>
+    <p class="muted">Promote someone to Pro Critic by setting their Roblox username and a password. Share that password with them so they can sign in as a critic.</p>
+    <div class="row"><div><label>Roblox username</label><input id="opUser" placeholder="their username"></div>
+      <div><label>Password for them</label><input id="opPass" placeholder="e.g. a passphrase"></div></div>
+    <button class="btn" id="opPromote">Make Pro Critic</button>
+    ${online?'<div class="note warn">Shared mode: changes are saved to the server and authorized by your owner login.</div>':'<div class="note warn">Local mode: promotions only apply in THIS browser until you deploy the backend and set API_BASE.</div>'}
+    <div id="opMsg" class="muted" style="margin-top:10px"></div>
+    <h3 style="margin-top:18px">Current critics</h3>
+    ${critics.length? critics.map(c=>`<div class="review" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px"><div><strong>${esc(c)}</strong> <span class="badge">✔</span></div><button class="btn alt sm" data-demote="${esc(c)}">Remove</button></div>`).join("") : '<div class="muted">No critics yet.</div>'}
+  </div>`;
 }
+function wireOwnerPanel(){
+  const msg=document.getElementById("opMsg");
+  document.getElementById("opPromote").onclick=async()=>{
+    const u=document.getElementById("opUser").value.trim(), p=document.getElementById("opPass").value.trim();
+    if(!u)return alert("Enter their username."); if(!p)return alert("Set a password for them.");
+    try{ await promote(u,p,true); msg.innerHTML=`✅ <strong>${esc(u)}</strong> is now a Pro Critic. Tell them to sign in with username "<strong>${esc(u)}</strong>" and that password.`; route(); }
+    catch(e){ msg.innerHTML='<span style="color:var(--accent)">'+esc(e.message)+'</span>'; }
+  };
+  document.querySelectorAll("[data-demote]").forEach(b=>b.onclick=async()=>{ if(!confirm("Remove "+b.dataset.demote+" as a critic?"))return; try{ await promote(b.dataset.demote,"none",false); route(); }catch(e){ alert(e.message); } });
+}
+
+/* ---------- recommendations ---------- */
+function buildTaste(){ const w={}; state.reviews.filter(r=>session&&String(r.author).toLowerCase()===String(session.username).toLowerCase()).forEach(r=>{ const wt=(r.rating-2.5)*(isCritic(r.author)?1.5:1); (r.genres||[]).forEach(g=>w[g]=(w[g]||0)+wt); }); state.favorites.forEach(f=>{ genresFor(f).forEach(g=>w[g]=(w[g]||0)+0.75); }); return w; }
 function renderRecsInto(){
-  const taste=buildTaste();
-  const pos=Object.entries(taste).filter(([,x])=>x>0).sort((a,b)=>b[1]-a[1]);
-  const sum=document.getElementById("tasteSummary"), bars=document.getElementById("tasteBars"), list=document.getElementById("recList");
-  if(!pos.length){ sum.textContent="Review a few games (3★+ with tags) to unlock recommendations."; bars.innerHTML=""; list.innerHTML=""; return; }
+  const taste=buildTaste(); const pos=Object.entries(taste).filter(([,x])=>x>0).sort((a,b)=>b[1]-a[1]);
+  const sum=document.getElementById("tasteSummary"),bars=document.getElementById("tasteBars"),list=document.getElementById("recList");
+  if(!pos.length){ sum.textContent="Write a few reviews (3★+ with tags) to unlock recommendations."; bars.innerHTML="";list.innerHTML=""; return; }
   sum.textContent="You lean toward: "+pos.slice(0,3).map(x=>x[0]).join(", ");
   bars.innerHTML=pos.slice(0,5).map(([g,x])=>`<div style="margin-top:8px"><div class="muted" style="font-size:.78rem">${esc(g)}</div><div class="bar"><i style="width:${Math.round(x/pos[0][1]*100)}%"></i></div></div>`).join("");
   const reviewed=new Set(state.reviews.map(r=>r.game.toLowerCase()));
-  const scored=CATALOG.map(([n,g])=>({name:n,genres:g})).filter(c=>!reviewed.has(c.name.toLowerCase())).map(c=>{
-    let s=0,m=[]; c.genres.forEach(g=>{ if(taste[g]>0){s+=taste[g];m.push(g);} });
-    if(state.favorites.some(f=>f.toLowerCase()===c.name.toLowerCase()))s+=1.5;
-    return {...c,score:s,matched:m};
-  }).filter(c=>c.score>0).sort((a,b)=>b.score-a.score).slice(0,10);
+  const scored=RECPOOL.filter(c=>!reviewed.has(c.name.toLowerCase())).map(c=>{ let s=0,m=[]; c.genres.forEach(g=>{if(taste[g]>0){s+=taste[g];m.push(g);}}); if(state.favorites.some(f=>f.toLowerCase()===c.name.toLowerCase()))s+=1.5; return {...c,score:s,matched:m}; }).filter(c=>c.score>0).sort((a,b)=>b.score-a.score).slice(0,10);
   if(!scored.length){ list.innerHTML='<div class="muted" style="margin-top:12px">No matches yet.</div>'; return; }
   const max=scored[0].score;
-  list.innerHTML=scored.map(c=>`<div class="rec" onclick="location.hash='#/game/${slug(c.name)}'">
-    <div class="score"><b>${Math.round(c.score/max*100)}</b><i>MATCH</i></div>
-    <div><h3>${esc(c.name)}</h3><div class="muted" style="font-size:.78rem">${c.genres.map(esc).join(" · ")}</div><div class="why">Because you like ${c.matched.map(esc).join(", ")}</div></div>
-  </div>`).join("");
+  list.innerHTML=scored.map(c=>`<div class="rec" onclick="location.hash='#/game/${slug(c.name)}'"><div class="score"><b>${Math.round(c.score/max*100)}</b><i>MATCH</i></div><div><h3>${esc(c.name)}</h3><div class="muted" style="font-size:.78rem">${c.genres.map(esc).join(" · ")}</div><div class="why">Because you like ${c.matched.map(esc).join(", ")}</div></div></div>`).join("");
 }
 async function linkRoblox(){
-  const user=document.getElementById("rbxUser").value.trim();
-  const status=document.getElementById("linkStatus"), favEl=document.getElementById("favList");
-  if(!user)return status.textContent="Enter a username first.";
-  status.textContent="Looking up "+user+"…"; favEl.innerHTML="";
+  const user=document.getElementById("rbxUser").value.trim(), status=document.getElementById("linkStatus"), favEl=document.getElementById("favList");
+  if(!user)return status.textContent="Enter a username."; status.textContent="Looking up "+user+"…"; favEl.innerHTML="";
   try{
     const r=await fetch("https://users.roblox.com/v1/usernames/users",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({usernames:[user],excludeBannedUsers:true})});
     const d=await r.json(); if(!d.data||!d.data.length)return status.textContent="No Roblox user found.";
-    const id=d.data[0].id; status.textContent="Fetching favorited games…";
-    const fr=await fetch(`https://games.roblox.com/v2/users/${id}/favorite/games?limit=25&sortOrder=Desc`);
-    const fd=await fr.json(); const titles=(fd.data||[]).map(x=>x.name).filter(Boolean);
-    if(!titles.length)return status.textContent="Linked, but no public favorites found.";
-    state.favorites=titles; saveLocal();
-    status.innerHTML=`✅ Imported ${titles.length} favorites from <strong>${esc(user)}</strong>.`;
-    favEl.innerHTML='<div class="chips">'+titles.map(t=>'<span class="chip sm">'+esc(t)+'</span>').join("")+'</div>';
-    renderRecsInto();
-  }catch(e){ status.innerHTML="⚠️ Roblox blocked the request from the browser (CORS). Your reviews still power recommendations."; }
+    const id=d.data[0].id; status.textContent="Fetching favorites…";
+    const fr=await fetch(`https://games.roblox.com/v2/users/${id}/favorite/games?limit=25&sortOrder=Desc`); const fd=await fr.json();
+    const titles=(fd.data||[]).map(x=>x.name).filter(Boolean); if(!titles.length)return status.textContent="No public favorites found.";
+    state.favorites=titles; saveLocal(); status.innerHTML=`✅ Imported ${titles.length} favorites.`; favEl.innerHTML='<div class="chips">'+titles.map(t=>'<span class="chip sm">'+esc(t)+'</span>').join("")+'</div>'; renderRecsInto();
+  }catch(e){ status.innerHTML="⚠️ Roblox blocked the request (CORS). Your reviews still power recommendations."; }
 }
 function exportData(){ const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="reviewblox-backup.json"; a.click(); }
-function clearData(){ if(confirm("Clear local reviews, critics & favorites from THIS browser?")){ state={reviews:[],critics:[],favorites:[]}; saveLocal(); location.hash="#/"; route(); } }
+function clearData(){ if(confirm("Clear local reviews, accounts & favorites from THIS browser?")){ state={reviews:[],critics:[],favorites:[],accounts:{}}; saveLocal(); location.hash="#/"; route(); } }
+
+/* ---------- CHARTS ---------- */
+function renderCharts(v){
+  const reviews=state.reviews;
+  if(!reviews.length){ v.innerHTML='<div class="hero" style="padding-top:10px"><h1>📊 Charts</h1></div><div class="empty">No data yet. Write some reviews to see charts.</div>'; return; }
+  const dist=[0,0,0,0,0]; reviews.forEach(r=>dist[r.rating-1]++); const maxd=Math.max(...dist);
+  const gc={}; reviews.forEach(r=>(r.genres||[]).forEach(g=>gc[g]=(gc[g]||0)+1)); const genres=Object.entries(gc).sort((a,b)=>b[1]-a[1]).slice(0,10); const maxg=Math.max(1,...genres.map(x=>x[1]));
+  const games=reviewedGames().sort((a,b)=>b.avg-a.avg||b.count-a.count).slice(0,10);
+  const crit=reviews.filter(r=>isCritic(r.author)), comm=reviews.filter(r=>!isCritic(r.author));
+  const cavg=crit.length?crit.reduce((a,r)=>a+r.rating,0)/crit.length:0, uavg=comm.length?comm.reduce((a,r)=>a+r.rating,0)/comm.length:0;
+  const played=[...GAMES].slice(0,10);
+  v.innerHTML=`<div class="hero" style="padding-top:10px"><h1>📊 Charts</h1></div>
+    <div class="card"><h2>Most played on Roblox (live snapshot)</h2>${played.map(g=>`<div class="chartrow"><div class="lab">${esc(g.name)}</div><div class="bar"><i style="width:${Math.round(g.ccu/played[0].ccu*100)}%;background:var(--green)"></i></div><div class="val">${fmt(g.ccu)}</div></div>`).join("")}</div>
+    <div class="card"><h2>Rating distribution</h2>${[5,4,3,2,1].map(s=>`<div class="chartrow"><div class="lab" style="width:46px">${s} ★</div><div class="bar"><i style="width:${Math.round(dist[s-1]/Math.max(1,maxd)*100)}%;background:var(--gold)"></i></div><div class="val">${dist[s-1]}</div></div>`).join("")}</div>
+    <div class="card"><h2>Reviews by tag</h2>${genres.map(([g,n])=>`<div class="chartrow"><div class="lab">${esc(g)}</div><div class="bar"><i style="width:${Math.round(n/maxg*100)}%"></i></div><div class="val">${n}</div></div>`).join("")}</div>
+    <div class="card"><h2>Top rated games</h2>${games.map(g=>`<div class="chartrow"><div class="lab">${esc(g.name)}</div><div class="bar"><i style="width:${Math.round(g.avg/5*100)}%;background:var(--green)"></i></div><div class="val">${g.avg.toFixed(1)}</div></div>`).join("")}</div>
+    ${crit.length?`<div class="card"><h2>Critics vs community</h2><div class="chartrow"><div class="lab">Pro critics</div><div class="bar"><i style="width:${Math.round(cavg/5*100)}%;background:var(--purple)"></i></div><div class="val">${cavg.toFixed(1)}</div></div><div class="chartrow"><div class="lab">Community</div><div class="bar"><i style="width:${Math.round(uavg/5*100)}%"></i></div><div class="val">${uavg.toFixed(1)}</div></div></div>`:""}`;
+}
 
 boot();
 </script>
