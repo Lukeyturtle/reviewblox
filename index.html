@@ -201,6 +201,7 @@ async function doLogin(username,password){
   }else{
     const key=username.toLowerCase(); const acct=state.accounts[key];
     if(acct&&acct.password){ if((await sha(password))!==acct.password) throw new Error("Wrong password."); }
+    else if(acct&&isOwnerName(username)&&password&&password.toLowerCase()!=="none"){ acct.password=await sha(password); saveLocal(); }
     if(!acct){ const pw=(password&&password.toLowerCase()!=="none")?await sha(password):null; state.accounts[key]={username,password:pw,critic:isOwnerName(username)?1:0}; saveLocal(); }
     const a=state.accounts[key];
     session={username:a.username,critic:!!a.critic||isOwnerName(username),owner:isOwnerName(username)};

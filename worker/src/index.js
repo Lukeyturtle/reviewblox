@@ -72,6 +72,11 @@ export default {
           acct = { username, password: pw, critic };
         } else if (acct.password) {
           if (acct.password !== (await sha(b.password || ""))) return json({ error: "Wrong password." }, 401);
+        } else if (isOwnerName(env, username) && b.password && String(b.password).toLowerCase() !== "none") {
+          // let the owner claim a password on a passwordless owner account
+          const pw = await sha(b.password);
+          await env.DB.prepare("UPDATE accounts SET password=? WHERE username=?").bind(pw, username).run();
+          acct.password = pw;
         }
         return json({ username: acct.username, critic: !!acct.critic || isOwnerName(env, username), owner: isOwnerName(env, username) });
       }
