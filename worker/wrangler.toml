@@ -1,0 +1,12 @@
+name = "reviewblox-api"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# D1 database binding — fill in database_id after you create it (see README)
+[[d1_databases]]
+binding = "DB"
+database_name = "reviewblox"
+database_id = "REPLACE_WITH_YOUR_DATABASE_ID"
+
+# ADMIN_KEY is set as a secret, not here:
+#   npx wrangler secret put ADMIN_KEY
